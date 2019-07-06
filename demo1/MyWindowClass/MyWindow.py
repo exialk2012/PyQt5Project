@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget,QLCDNumber
+from PyQt5.QtGui import QIcon
 
 class MyWindow(QWidget):
     def __init__(self):
@@ -9,6 +10,7 @@ class MyWindow(QWidget):
         self.value = 0
         self.setGeometry(300,300,300,300)
         self.setWindowTitle('不错的窗口')
+        self.setWindowIcon(QIcon('icon.ico'))
 
         self.lcd = QLCDNumber(self)
 
