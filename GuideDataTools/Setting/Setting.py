@@ -1,0 +1,1 @@
+IconPath = r'E:\PyQt Project\PyQt5Project\GuideDataTools\WindowClass\icon.ico'
