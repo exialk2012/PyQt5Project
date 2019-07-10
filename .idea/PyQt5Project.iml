@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/demo1/MyWindowClass" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/demo1" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GuideDataTools" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Demo3" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7 (PyQt5Project)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
