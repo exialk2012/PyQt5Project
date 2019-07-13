@@ -28,7 +28,7 @@ class GDMain(QMainWindow):
 
         # 设置引导相关控件
         # 设置引导节点名与节点名输入框与插入按钮
-        self.gd_name_lbl = QLabel('GuideName')
+        self.gd_name_lbl = QLabel('<b>GuideName</b>')
         self.gd_name_input_edit = QLineEdit()
         self.gd_name_input_edit.setPlaceholderText('请输入引导节点名称')
         self.gd_name_add_btn = QPushButton('插入')
@@ -40,73 +40,127 @@ class GDMain(QMainWindow):
         self.gd_name_input_edit.textChanged.connect(self.changeGDNameInputByLineText)
 
         # 设置引导节点触发器与触发器相关
-        self.triggers_lbl = QLabel('Triggers')
+        self.triggers_lbl = QLabel('<b>Triggers</b>')
         self.triggers_data_lbl = QLabel('Data')
         self.trigger_type_lbl = QLabel('TriggerType')
-        self.trigger_type_line_edit = QLineEdit()
-        self.trigger_type_line_edit.setPlaceholderText('请选择引导触发器类型')
+        self.trigger_type_cb = QComboBox()
+        self.trigger_type_cb.addItem('-- 请选择触发器类型 --')
+        # self.trigger_type_cb.setPlaceholderText('请选择引导触发器类型')
         self.trigger_data_lbl1 = QLabel('content1')
+        self.trigger_data_lbl1.setVisible(False)
         self.trigger_data_lineedit1 = QLineEdit()
+        self.trigger_data_lineedit1.setVisible(False)
         self.trigger_data_lbl2 = QLabel('content2')
+        self.trigger_data_lbl2.setVisible(False)
         self.trigger_data_lineedit2 = QLineEdit()
+        self.trigger_data_lineedit2.setVisible(False)
         self.trigger_data_lbl3 = QLabel('content3')
+        self.trigger_data_lbl3.setVisible(False)
         self.trigger_data_lineedit3 = QLineEdit()
+        self.trigger_data_lineedit3.setVisible(False)
         self.trigger_add_btn = QPushButton('添加')
+        self.trigger_add_btn.setEnabled(False)
         self.trigger_del_btn = QPushButton('删除')
+        self.trigger_del_btn.setEnabled(False)
         self.trigger_insert_btn = QPushButton('插入')
+        self.trigger_insert_btn.setEnabled(False)
         self.trigger_remove_btn = QPushButton('移除')
+        self.trigger_remove_btn.setEnabled(False)
 
         # 设置引导前置条件触发器相关
         self.pre_cb = QCheckBox('Preconditions')
+        self.pre_cb.stateChanged.connect(self.pre_CB_StateChange)
+
         self.pre_data_lbl = QLabel('Data')
+        self.pre_data_lbl.setEnabled(False)
         self.pre_condition_type_lbl = QLabel('ConditionType')
-        self.pre_condition_type_edit = QLineEdit()
-        self.pre_condition_type_edit.setPlaceholderText('请选择引导前置条件类型')
+        self.pre_condition_type_lbl.setEnabled(False)
+        self.pre_condition_type_edit = QComboBox()
+        self.pre_condition_type_edit.addItem('-- 请选择条件类型 --')
+        self.pre_condition_type_edit.setEnabled(False)
+
+
+        # self.pre_condition_type_edit.setPlaceholderText('请选择引导前置条件类型')
+
         self.pre_condition_data_lbl1 = QLabel('content1')
+        self.pre_condition_data_lbl1.setVisible(False)
         self.pre_condition_data_edit1 = QLineEdit()
+        self.pre_condition_data_edit1.setVisible(False)
+
         self.pre_condition_data_lbl2 = QLabel('content2')
+        self.pre_condition_data_lbl2.setVisible(False)
         self.pre_condition_data_edit2 = QLineEdit()
+        self.pre_condition_data_edit2.setVisible(False)
+
         self.pre_condition_data_lbl3 = QLabel('content3')
+        self.pre_condition_data_lbl3.setVisible(False)
         self.pre_condition_data_edit3 = QLineEdit()
+        self.pre_condition_data_edit3.setVisible(False)
+
         self.pre_add_btn = QPushButton('添加')
+        self.pre_add_btn.setEnabled(False)
         self.pre_del_btn = QPushButton('删除')
+        self.pre_del_btn.setEnabled(False)
         self.pre_insert_btn = QPushButton('插入')
+        self.pre_insert_btn.setEnabled(False)
         self.pre_remove_btn = QPushButton('移除')
+        self.pre_remove_btn.setEnabled(False)
 
         # 设置NodeData相关空间
-        self.nodedata_lbl = QLabel('NodeData')
+        self.nodedata_lbl = QLabel('<b>NodeData</b>')
 
         self.is_click_to_next_lbl = QLabel('IsClickToNext')
         self.is_click_to_next_cb = QComboBox()
+        self.is_click_to_next_cb.addItem('false')
+        self.is_click_to_next_cb.addItem('true')
 
         self.is_auto_to_next_lbl = QLabel('IsAutoToNext')
         self.is_auto_to_next_cb = QComboBox()
+        self.is_auto_to_next_cb.addItem('false')
+        self.is_auto_to_next_cb.addItem('true')
 
         self.dodata_lbl = QLabel('DoData')
 
         self.data_lbl = QLabel('Data')
 
         self.dotype_lbl = QLabel('DoType')
-        self.dotype_edit = QLineEdit()
-        self.dotype_edit.setPlaceholderText('请选择引导执行效果')
+        self.dotype_cb = QComboBox()
+        self.dotype_cb.addItem('-- 请选择执行条件 --')
+        # self.dotype_cb.setPlaceholderText('请选择引导执行效果')
 
         self.dotype_data_lbl1 = QLabel('content1')
+        self.dotype_data_lbl1.setVisible(False)
         self.dotype_data_edit1 = QLineEdit()
+        self.dotype_data_edit1.setVisible(False)
         self.dotype_data_lbl2 = QLabel('content2')
+        self.dotype_data_lbl2.setVisible(False)
         self.dotype_data_edit2 = QLineEdit()
+        self.dotype_data_edit2.setVisible(False)
         self.dotype_data_lbl3 = QLabel('content3')
+        self.dotype_data_lbl3.setVisible(False)
         self.dotype_data_edit3 = QLineEdit()
+        self.dotype_data_edit3.setVisible(False)
         self.dotype_data_lbl4 = QLabel('content4')
+        self.dotype_data_lbl4.setVisible(False)
         self.dotype_data_edit4 = QLineEdit()
+        self.dotype_data_edit4.setVisible(False)
         self.dotype_data_lbl5 = QLabel('content5')
+        self.dotype_data_lbl5.setVisible(False)
         self.dotype_data_edit5 = QLineEdit()
+        self.dotype_data_edit5.setVisible(False)
         self.dotype_data_summary_lbl = QLabel('Summary')
+        self.dotype_data_summary_lbl.setVisible(False)
         self.dotype_data_summary_edit = QLineEdit()
+        self.dotype_data_summary_edit.setVisible(False)
 
         self.nodedata_add_btn = QPushButton('添加')
+        self.nodedata_add_btn.setEnabled(False)
         self.nodedata_del_btn = QPushButton('删除')
+        self.nodedata_del_btn.setEnabled(False)
         self.nodedata_insert_btn = QPushButton('插入')
+        self.nodedata_insert_btn.setEnabled(False)
         self.nodedata_remove_btn = QPushButton('移除')
+        self.nodedata_remove_btn.setEnabled(False)
 
         # 设置引导文本显示相关
         self.gd_node_content = {}
@@ -185,7 +239,7 @@ class GDMain(QMainWindow):
         gd_input_vbox.addWidget(self.triggers_data_lbl)
         trigger_type_hbox = QHBoxLayout()
         trigger_type_hbox.addWidget(self.trigger_type_lbl)
-        trigger_type_hbox.addWidget(self.trigger_type_line_edit)
+        trigger_type_hbox.addWidget(self.trigger_type_cb)
         gd_input_vbox.addLayout(trigger_type_hbox)
 
         trigger_data1_hbox = QHBoxLayout()
@@ -260,7 +314,7 @@ class GDMain(QMainWindow):
 
         dotype_hbox = QHBoxLayout()
         dotype_hbox.addWidget(self.dotype_lbl)
-        dotype_hbox.addWidget(self.dotype_edit)
+        dotype_hbox.addWidget(self.dotype_cb)
         gd_input_vbox.addLayout(dotype_hbox)
 
         dotype_data_hbox1 = QHBoxLayout()
@@ -317,3 +371,28 @@ class GDMain(QMainWindow):
         gd_node_view_vbox.addLayout(save_gd_json_hbox)
 
         return main_hbox
+
+    def pre_CB_StateChange(self):
+        if self.pre_cb.isChecked() == False:
+            self.pre_data_lbl.setEnabled(False)
+            self.pre_condition_type_lbl.setEnabled(False)
+            self.pre_condition_type_edit.setEnabled(False)
+            self.pre_condition_data_lbl1.setEnabled(False)
+            self.pre_condition_data_edit1.setEnabled(False)
+            self.pre_condition_data_lbl2.setEnabled(False)
+            self.pre_condition_data_edit2.setEnabled(False)
+            self.pre_condition_data_lbl3.setEnabled(False)
+            self.pre_condition_data_edit3.setEnabled(False)
+            self.statusBar().showMessage('前置条件已禁用')
+        else:
+            self.pre_data_lbl.setEnabled(True)
+            self.pre_condition_type_lbl.setEnabled(True)
+            self.pre_condition_type_edit.setEnabled(True)
+            self.pre_condition_data_lbl1.setEnabled(True)
+            self.pre_condition_data_edit1.setEnabled(True)
+            self.pre_condition_data_lbl2.setEnabled(True)
+            self.pre_condition_data_edit2.setEnabled(True)
+            self.pre_condition_data_lbl3.setEnabled(True)
+            self.pre_condition_data_edit3.setEnabled(True)
+            self.statusBar().showMessage('前置条件已启用')
+
