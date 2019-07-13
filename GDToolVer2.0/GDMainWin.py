@@ -45,6 +45,22 @@ class GDMain(QMainWindow):
         self.gdnamedelbtn.clicked.connect(self.clickGDNameDel)
         self.gdnameinputedit.textChanged.connect(self.changeGDNameInputByLineText)
 
+        #设置引导节点触发器与触发器相关
+        self.triggerslabel = QLabel('Triggers')
+        self.triggersdatalabel =QLabel('Data')
+        self.triggertypelable = QLabel('TriggerType')
+        self.triggertypelineedit = QLineEdit()
+        self.triggertypelineedit.setPlaceholderText('请选择引导触发器类型')
+        self.trigger_data_label1 = QLabel('content1')
+        self.trigger_data_lineedit1 = QLineEdit()
+        self.trigger_data_label2 = QLabel('content2')
+        self.trigger_data_lineedit2 = QLineEdit()
+        self.trigger_data_label3 = QLabel('content3')
+        self.trigger_data_lineedit3 = QLineEdit()
+        self.trigger_add_btn = QPushButton('插入')
+        self.trigger_del_btn = QPushButton('删除')
+
+
         # 设置引导文本显示相关
         self.gdnodecontent = {}
         self.gdnodeviewlabel = QLabel('引导文本预览:')
@@ -67,12 +83,44 @@ class GDMain(QMainWindow):
         # hbox1.addLayout(gdnodevbox)
 
         # 引导节点名相关布局
+        gdinputvbox = QVBoxLayout()
         gdnamehbox = QHBoxLayout()
         gdnamehbox.addWidget(self.gdnamelabel)
         gdnamehbox.addWidget(self.gdnameinputedit)
         gdnamehbox.addWidget(self.gdnameaddbtn)
         gdnamehbox.addWidget(self.gdnamedelbtn)
-        hbox1.addLayout(gdnamehbox)
+        gdinputvbox.addLayout(gdnamehbox)
+        gdinputvbox.addStretch(1)
+        # gdinputvbox.addWidget(QSplitter(Qt.Horizontal))
+        gdinputvbox.addWidget(self.triggerslabel)
+        gdinputvbox.addWidget(self.triggersdatalabel)
+        triggertypehbox = QHBoxLayout()
+        triggertypehbox.addWidget(self.triggertypelable)
+        triggertypehbox.addWidget(self.triggertypelineedit)
+        gdinputvbox.addLayout(triggertypehbox)
+
+        trigger_data1_hbox = QHBoxLayout()
+        trigger_data1_hbox.addWidget(self.trigger_data_label1)
+        trigger_data1_hbox.addWidget(self.trigger_data_lineedit1)
+        gdinputvbox.addLayout(trigger_data1_hbox)
+
+        trigger_data2_hbox = QHBoxLayout()
+        trigger_data2_hbox.addWidget(self.trigger_data_label2)
+        trigger_data2_hbox.addWidget(self.trigger_data_lineedit2)
+        gdinputvbox.addLayout(trigger_data2_hbox)
+
+        trigger_data3_hbox = QHBoxLayout()
+        trigger_data3_hbox.addWidget(self.trigger_data_label3)
+        trigger_data3_hbox.addWidget(self.trigger_data_lineedit3)
+        gdinputvbox.addLayout(trigger_data3_hbox)
+
+        trigger_btn_hbox = QHBoxLayout()
+        trigger_btn_hbox.addWidget(self.trigger_add_btn)
+        trigger_btn_hbox.addWidget(self.trigger_del_btn)
+        gdinputvbox.addLayout(trigger_btn_hbox)
+
+        gdinputvbox.addStretch(1)
+        hbox1.addLayout(gdinputvbox)
 
         # 设置引导文本预览相关布局
         gdnodeviewvbox = QVBoxLayout()
