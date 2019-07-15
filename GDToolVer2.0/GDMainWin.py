@@ -7,26 +7,33 @@ import json
 class GDMain(QMainWindow):
     def __init__(self):
         super(GDMain, self).__init__()
-        self.initUI()
+        self.initMainWindow()
 
-    def initUI(self):
-        # 设置窗口大小
+    def initMainWindow(self):
+        self.setMainWindowProperty()
+        self.initTreeView()
+        self.initGDName()
+        self.initTriggers()
+        self.initConditional()
+        self.initNodeData()
+        self.initJsonView()
+        self.initGDJsonSaveBtn()
+        self.initObjectWidgets()
+        self.show()
+
+    def setMainWindowProperty(self):
         self.setFixedSize(800, 720)
-
-        # 设置窗口标题
         self.setWindowTitle('引导工具 2.0')
-
-        # 设置窗口的图标
         self.setWindowIcon(QIcon(r'..\GDToolVer2.0\icon.ico'))
 
+        self.statusBar().showMessage('启动成功', 3000)
+
+    def initTreeView(self):
         # 设置引导列树控件
         self.gd_tree_lbl = QLabel('引导节点列表')
         self.gd_tree_viewer = QTreeWidget()
 
-        # 设置状态栏启动文本
-        self.statusBar().showMessage('启动成功', 3000)
-
-        # 设置引导相关控件
+    def initGDName(self):
         # 设置引导节点名与节点名输入框与插入按钮
         self.gd_name_lbl = QLabel('<b>GuideName</b>')
         self.gd_name_input_edit = QLineEdit()
@@ -39,12 +46,15 @@ class GDMain(QMainWindow):
         self.gd_name_del_btn.clicked.connect(self.clickGDNameDel)
         self.gd_name_input_edit.textChanged.connect(self.changeGDNameInputByLineText)
 
+    def initTriggers(self):
         # 设置引导节点触发器与触发器相关
+        trigger_types = []
         self.triggers_lbl = QLabel('<b>Triggers</b>')
         self.triggers_data_lbl = QLabel('Data')
         self.trigger_type_lbl = QLabel('TriggerType')
         self.trigger_type_cb = QComboBox()
         self.trigger_type_cb.addItem('-- 请选择触发器类型 --')
+        # self.trigger_type_cb.addItems()
         # self.trigger_type_cb.setPlaceholderText('请选择引导触发器类型')
         self.trigger_data_lbl1 = QLabel('content1')
         self.trigger_data_lbl1.setVisible(False)
@@ -67,6 +77,7 @@ class GDMain(QMainWindow):
         self.trigger_remove_btn = QPushButton('移除')
         self.trigger_remove_btn.setEnabled(False)
 
+    def initConditional(self):
         # 设置引导前置条件触发器相关
         self.pre_cb = QCheckBox('Preconditions')
         self.pre_cb.stateChanged.connect(self.pre_CB_StateChange)
@@ -78,7 +89,6 @@ class GDMain(QMainWindow):
         self.pre_condition_type_edit = QComboBox()
         self.pre_condition_type_edit.addItem('-- 请选择条件类型 --')
         self.pre_condition_type_edit.setEnabled(False)
-
 
         # self.pre_condition_type_edit.setPlaceholderText('请选择引导前置条件类型')
 
@@ -106,6 +116,7 @@ class GDMain(QMainWindow):
         self.pre_remove_btn = QPushButton('移除')
         self.pre_remove_btn.setEnabled(False)
 
+    def initNodeData(self):
         # 设置NodeData相关空间
         self.nodedata_lbl = QLabel('<b>NodeData</b>')
 
@@ -162,6 +173,7 @@ class GDMain(QMainWindow):
         self.nodedata_remove_btn = QPushButton('移除')
         self.nodedata_remove_btn.setEnabled(False)
 
+    def initJsonView(self):
         # 设置引导文本显示相关
         self.gd_node_content = {}
         self.gd_node_view_lbl = QLabel('引导文本预览:')
@@ -169,15 +181,16 @@ class GDMain(QMainWindow):
         self.gd_node_view.setReadOnly(True)
         self.gd_node_view.textChanged.connect(self.changSaveJsonByGDNodeView)
 
+    def initGDJsonSaveBtn(self):
         # 设置保存引导json按钮相关
         self.gd_json_save_btn = QPushButton('保存脚本')
         self.gd_json_save_btn.setEnabled(False)
         self.gd_json_save_btn.clicked.connect(self.clickGDJsonSave)
 
+    def initObjectWidgets(self):
         obj_widget = QWidget()
         obj_widget.setLayout(self.setWindowLayout())
         self.setCentralWidget(obj_widget)
-        self.show()
 
     def clickGDNameDel(self):
         self.gd_name_input_edit.clear()
@@ -211,6 +224,30 @@ class GDMain(QMainWindow):
             self.gd_json_save_btn.setEnabled(True)
         else:
             self.gd_json_save_btn.setEnabled(False)
+
+    def pre_CB_StateChange(self):
+        if self.pre_cb.isChecked() == False:
+            self.pre_data_lbl.setEnabled(False)
+            self.pre_condition_type_lbl.setEnabled(False)
+            self.pre_condition_type_edit.setEnabled(False)
+            self.pre_condition_data_lbl1.setEnabled(False)
+            self.pre_condition_data_edit1.setEnabled(False)
+            self.pre_condition_data_lbl2.setEnabled(False)
+            self.pre_condition_data_edit2.setEnabled(False)
+            self.pre_condition_data_lbl3.setEnabled(False)
+            self.pre_condition_data_edit3.setEnabled(False)
+            self.statusBar().showMessage('前置条件已禁用')
+        else:
+            self.pre_data_lbl.setEnabled(True)
+            self.pre_condition_type_lbl.setEnabled(True)
+            self.pre_condition_type_edit.setEnabled(True)
+            self.pre_condition_data_lbl1.setEnabled(True)
+            self.pre_condition_data_edit1.setEnabled(True)
+            self.pre_condition_data_lbl2.setEnabled(True)
+            self.pre_condition_data_edit2.setEnabled(True)
+            self.pre_condition_data_lbl3.setEnabled(True)
+            self.pre_condition_data_edit3.setEnabled(True)
+            self.statusBar().showMessage('前置条件已启用')
 
     def setWindowLayout(self):
         # 设置布局
@@ -372,27 +409,5 @@ class GDMain(QMainWindow):
 
         return main_hbox
 
-    def pre_CB_StateChange(self):
-        if self.pre_cb.isChecked() == False:
-            self.pre_data_lbl.setEnabled(False)
-            self.pre_condition_type_lbl.setEnabled(False)
-            self.pre_condition_type_edit.setEnabled(False)
-            self.pre_condition_data_lbl1.setEnabled(False)
-            self.pre_condition_data_edit1.setEnabled(False)
-            self.pre_condition_data_lbl2.setEnabled(False)
-            self.pre_condition_data_edit2.setEnabled(False)
-            self.pre_condition_data_lbl3.setEnabled(False)
-            self.pre_condition_data_edit3.setEnabled(False)
-            self.statusBar().showMessage('前置条件已禁用')
-        else:
-            self.pre_data_lbl.setEnabled(True)
-            self.pre_condition_type_lbl.setEnabled(True)
-            self.pre_condition_type_edit.setEnabled(True)
-            self.pre_condition_data_lbl1.setEnabled(True)
-            self.pre_condition_data_edit1.setEnabled(True)
-            self.pre_condition_data_lbl2.setEnabled(True)
-            self.pre_condition_data_edit2.setEnabled(True)
-            self.pre_condition_data_lbl3.setEnabled(True)
-            self.pre_condition_data_edit3.setEnabled(True)
-            self.statusBar().showMessage('前置条件已启用')
+
 
