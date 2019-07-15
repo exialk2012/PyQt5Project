@@ -78,7 +78,7 @@ class GDMain(QMainWindow):
         self.trigger_data_lbl3 = QLabel('content3')
         self.trigger_data_lineedit3 = QLineEdit()
 
-        trigger_widgets = [
+        trigger_widgets_isvisiable_list = [
             self.trigger_data_lbl1,
             self.trigger_data_lineedit1,
             self.trigger_data_lbl2,
@@ -86,20 +86,20 @@ class GDMain(QMainWindow):
             self.trigger_data_lbl3,
             self.trigger_data_lineedit3
         ]
-        self.isWidgetVisible(trigger_widgets, False)
+        self.isWidgetVisible(trigger_widgets_isvisiable_list, False)
 
         self.trigger_add_btn = QPushButton('添加')
         self.trigger_del_btn = QPushButton('删除')
         self.trigger_insert_btn = QPushButton('插入')
         self.trigger_remove_btn = QPushButton('移除')
 
-        trigger_btns = [
+        trigger_widgets_isenable_list = [
             self.trigger_add_btn,
             self.trigger_del_btn,
             self.trigger_insert_btn,
             self.trigger_remove_btn
         ]
-        self.isWidgetEnable(trigger_btns, False)
+        self.isWidgetEnable(trigger_widgets_isenable_list, False)
 
     def initConditional(self):
         # 设置引导前置条件触发器相关
@@ -107,39 +107,46 @@ class GDMain(QMainWindow):
         self.pre_cb.stateChanged.connect(self.pre_CB_StateChange)
 
         self.pre_data_lbl = QLabel('Data')
-        self.pre_data_lbl.setEnabled(False)
         self.pre_condition_type_lbl = QLabel('ConditionType')
-        self.pre_condition_type_lbl.setEnabled(False)
         self.pre_condition_type_edit = QComboBox()
         self.pre_condition_type_edit.addItem('-- 请选择条件类型 --')
         self.pre_condition_type_edit.addItem('1.GuideCompleted')
-        self.pre_condition_type_edit.setEnabled(False)
-
-        # self.pre_condition_type_edit.setPlaceholderText('请选择引导前置条件类型')
 
         self.pre_condition_data_lbl1 = QLabel('content1')
-        self.pre_condition_data_lbl1.setVisible(False)
         self.pre_condition_data_edit1 = QLineEdit()
-        self.pre_condition_data_edit1.setVisible(False)
 
         self.pre_condition_data_lbl2 = QLabel('content2')
-        self.pre_condition_data_lbl2.setVisible(False)
         self.pre_condition_data_edit2 = QLineEdit()
-        self.pre_condition_data_edit2.setVisible(False)
 
         self.pre_condition_data_lbl3 = QLabel('content3')
-        self.pre_condition_data_lbl3.setVisible(False)
         self.pre_condition_data_edit3 = QLineEdit()
-        self.pre_condition_data_edit3.setVisible(False)
 
         self.pre_add_btn = QPushButton('添加')
-        self.pre_add_btn.setEnabled(False)
         self.pre_del_btn = QPushButton('删除')
-        self.pre_del_btn.setEnabled(False)
         self.pre_insert_btn = QPushButton('插入')
-        self.pre_insert_btn.setEnabled(False)
         self.pre_remove_btn = QPushButton('移除')
-        self.pre_remove_btn.setEnabled(False)
+
+        pre_cond_isvisiable_list = [
+            self.pre_condition_data_lbl1,
+            self.pre_condition_data_edit1,
+            self.pre_condition_data_lbl2,
+            self.pre_condition_data_edit2,
+            self.pre_condition_data_lbl3,
+            self.pre_condition_data_edit3
+        ]
+
+        pre_cond_isenable_list = [
+            self.pre_data_lbl,
+            self.pre_condition_type_lbl,
+            self.pre_condition_type_edit,
+            self.pre_add_btn,
+            self.pre_del_btn,
+            self.pre_insert_btn,
+            self.pre_remove_btn
+        ]
+
+        self.isWidgetVisible(pre_cond_isvisiable_list, False)
+        self.isWidgetEnable(pre_cond_isenable_list, False)
 
     def initNodeData(self):
         # 设置NodeData相关空间
@@ -197,7 +204,8 @@ class GDMain(QMainWindow):
             "50.UnlockCardPackage",
             "51.HeroEvolutionHideHero",
             "52.HideHeroThumbnail",
-            "53.WaitEventCompleted"
+            "53.WaitEventCompleted",
+            "54.SetElementAngle"
         ]
         self.nodedata_lbl = QLabel('<b>NodeData</b>')
 
@@ -222,38 +230,47 @@ class GDMain(QMainWindow):
         # self.dotype_cb.setPlaceholderText('请选择引导执行效果')
 
         self.dotype_data_lbl1 = QLabel('content1')
-        self.dotype_data_lbl1.setVisible(False)
         self.dotype_data_edit1 = QLineEdit()
-        self.dotype_data_edit1.setVisible(False)
         self.dotype_data_lbl2 = QLabel('content2')
-        self.dotype_data_lbl2.setVisible(False)
         self.dotype_data_edit2 = QLineEdit()
-        self.dotype_data_edit2.setVisible(False)
         self.dotype_data_lbl3 = QLabel('content3')
-        self.dotype_data_lbl3.setVisible(False)
         self.dotype_data_edit3 = QLineEdit()
-        self.dotype_data_edit3.setVisible(False)
         self.dotype_data_lbl4 = QLabel('content4')
-        self.dotype_data_lbl4.setVisible(False)
         self.dotype_data_edit4 = QLineEdit()
-        self.dotype_data_edit4.setVisible(False)
         self.dotype_data_lbl5 = QLabel('content5')
-        self.dotype_data_lbl5.setVisible(False)
         self.dotype_data_edit5 = QLineEdit()
-        self.dotype_data_edit5.setVisible(False)
         self.dotype_data_summary_lbl = QLabel('Summary')
-        self.dotype_data_summary_lbl.setVisible(False)
         self.dotype_data_summary_edit = QLineEdit()
-        self.dotype_data_summary_edit.setVisible(False)
 
         self.nodedata_add_btn = QPushButton('添加')
-        self.nodedata_add_btn.setEnabled(False)
         self.nodedata_del_btn = QPushButton('删除')
-        self.nodedata_del_btn.setEnabled(False)
         self.nodedata_insert_btn = QPushButton('插入')
-        self.nodedata_insert_btn.setEnabled(False)
         self.nodedata_remove_btn = QPushButton('移除')
-        self.nodedata_remove_btn.setEnabled(False)
+
+        node_data_isvisiable_list = [
+            self.dotype_data_lbl1,
+            self.dotype_data_edit1,
+            self.dotype_data_lbl2,
+            self.dotype_data_edit2,
+            self.dotype_data_lbl3,
+            self.dotype_data_edit3,
+            self.dotype_data_lbl4,
+            self.dotype_data_edit4,
+            self.dotype_data_lbl5,
+            self.dotype_data_edit5,
+            self.dotype_data_summary_lbl,
+            self.dotype_data_summary_edit
+        ]
+
+        node_data_isenable_list = [
+            self.nodedata_add_btn,
+            self.nodedata_del_btn,
+            self.nodedata_insert_btn,
+            self.nodedata_remove_btn
+        ]
+
+        self.isWidgetVisible(node_data_isvisiable_list, False)
+        self.isWidgetEnable(node_data_isenable_list, False)
 
     def initJsonView(self):
         # 设置引导文本显示相关
@@ -503,4 +520,4 @@ class GDMain(QMainWindow):
             pass
         else:
             for widget in widgets:
-                widget.setEnabled(isVisible)
+                widget.setVisible(isVisible)
