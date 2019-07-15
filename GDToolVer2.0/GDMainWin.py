@@ -56,14 +56,14 @@ class GDMain(QMainWindow):
         # 设置引导节点触发器与触发器相关
         trigger_types = [
             "-- 请选择触发器类型 --",
-            "1.OpenPanel",
-            "2.OpenArea",
-            "3.NPCClick",
-            "4.GuideCompleted",
-            "5.ArrivalNode",
-            "6.PassingNode",
-            "7.LoginSuccess",
-            "8.UIClick"
+            "OpenPanel",
+            "OpenArea",
+            "NPCClick",
+            "GuideCompleted",
+            "ArrivalNode",
+            "PassingNode",
+            "LoginSuccess",
+            "UIClick"
         ]
         self.triggers_lbl = QLabel('<b>Triggers</b>')
         self.triggers_data_lbl = QLabel('Data')
@@ -101,6 +101,20 @@ class GDMain(QMainWindow):
         ]
         self.isWidgetEnable(trigger_widgets_isenable_list, False)
 
+        self.trigger_data_lbls_list = [
+            self.trigger_data_lbl1,
+            self.trigger_data_lbl2,
+            self.trigger_data_lbl3
+        ]
+
+        self.trigger_data_edits_list = [
+            self.trigger_data_lineedit1,
+            self.trigger_data_lineedit2,
+            self.trigger_data_lineedit3
+        ]
+
+        self.trigger_type_cb.currentIndexChanged.connect(self.changeTriggerDataByType)
+
     def initConditional(self):
         # 设置引导前置条件触发器相关
         self.pre_cb = QCheckBox('Preconditions')
@@ -110,7 +124,7 @@ class GDMain(QMainWindow):
         self.pre_condition_type_lbl = QLabel('ConditionType')
         self.pre_condition_type_edit = QComboBox()
         self.pre_condition_type_edit.addItem('-- 请选择条件类型 --')
-        self.pre_condition_type_edit.addItem('1.GuideCompleted')
+        self.pre_condition_type_edit.addItem('GuideCompleted')
 
         self.pre_condition_data_lbl1 = QLabel('content1')
         self.pre_condition_data_edit1 = QLineEdit()
@@ -134,7 +148,6 @@ class GDMain(QMainWindow):
             self.pre_condition_data_lbl3,
             self.pre_condition_data_edit3
         ]
-
         pre_cond_isenable_list = [
             self.pre_data_lbl,
             self.pre_condition_type_lbl,
@@ -144,68 +157,81 @@ class GDMain(QMainWindow):
             self.pre_insert_btn,
             self.pre_remove_btn
         ]
-
         self.isWidgetVisible(pre_cond_isvisiable_list, False)
         self.isWidgetEnable(pre_cond_isenable_list, False)
+
+        self.pre_cond_data_lbls = [
+            self.pre_condition_data_lbl1,
+            self.pre_condition_data_lbl2,
+            self.pre_condition_data_lbl3
+        ]
+
+        self.pre_cond_data_edits = [
+            self.pre_condition_data_edit1,
+            self.pre_condition_data_edit2,
+            self.pre_condition_data_edit3
+        ]
+
+        self.pre_condition_type_edit.currentIndexChanged.connect(self.changeConditionByType)
 
     def initNodeData(self):
         # 设置NodeData相关空间
         node_data_types = [
             "-- 请选择执行条件 --",
-            "1.SetTips",
-            "2.ClearTips",
-            "3.SetBlink",
-            "4.HideMask",
-            "5.ShowMask",
-            "6.SetMaskAlpha",
-            "7.Highlight",
-            "8.ClearHighlight",
-            "9.HideUIObject",
-            "10.ShowUIObject",
-            "11.ClearGuidePanel",
-            "12.ShowPictures",
-            "13.SetInteractableNames",
-            "14.SetInteractable",
-            "15.WaitPanelOpen",
-            "16.WaitPanelClose",
-            "17.SetCanWalk",
-            "18.SetMapActive",
-            "19.ShowNodeElement",
-            "20.HideNodeElement",
-            "21.EnableNodeEvent",
-            "22.DisableNodeEvent",
-            "23.LoadNpc",
-            "24.DestroyNPC",
-            "25.PlayAVG",
-            "26.EnterAdventure",
-            "27.Await",
-            "28.OpenUIPanel",
-            "29.CloseUIPanel",
-            "30.Teleport",
-            "31.Complete",
-            "32.WaitAreaOpen",
-            "33.WaitAreaClose",
-            "34.WaitMoveTo",
-            "35.UnlockModule",
-            "36.ShowSingleEffect",
-            "37.EnterGame",
-            "38.LoadElement",
-            "39.DefaultTeleport",
-            "40.UnlockNewTeleport",
-            "41.AddMapEvent",
-            "42.ClearMapEvent",
-            "43.PlayVideo",
-            "44.PlayBgm",
-            "45.PauseBgm",
-            "46.ChangeHero",
-            "47.LockSkin",
-            "48.UnlockSkin",
-            "49.LockCardPackage",
-            "50.UnlockCardPackage",
-            "51.HeroEvolutionHideHero",
-            "52.HideHeroThumbnail",
-            "53.WaitEventCompleted",
-            "54.SetElementAngle"
+            "SetTips",
+            "ClearTips",
+            "SetBlink",
+            "HideMask",
+            "ShowMask",
+            "SetMaskAlpha",
+            "Highlight",
+            "ClearHighlight",
+            "HideUIObject",
+            "ShowUIObject",
+            "ClearGuidePanel",
+            "ShowPictures",
+            "SetInteractableNames",
+            "SetInteractable",
+            "WaitPanelOpen",
+            "WaitPanelClose",
+            "SetCanWalk",
+            "SetMapActive",
+            "ShowNodeElement",
+            "HideNodeElement",
+            "EnableNodeEvent",
+            "DisableNodeEvent",
+            "LoadNpc",
+            "DestroyNPC",
+            "PlayAVG",
+            "EnterAdventure",
+            "Await",
+            "OpenUIPanel",
+            "CloseUIPanel",
+            "Teleport",
+            "Complete",
+            "WaitAreaOpen",
+            "WaitAreaClose",
+            "WaitMoveTo",
+            "UnlockModule",
+            "ShowSingleEffect",
+            "EnterGame",
+            "LoadElement",
+            "DefaultTeleport",
+            "UnlockNewTeleport",
+            "AddMapEvent",
+            "ClearMapEvent",
+            "PlayVideo",
+            "PlayBgm",
+            "PauseBgm",
+            "ChangeHero",
+            "LockSkin",
+            "UnlockSkin",
+            "LockCardPackage",
+            "UnlockCardPackage",
+            "HeroEvolutionHideHero",
+            "HideHeroThumbnail",
+            "WaitEventCompleted",
+            "SetElementAngle"
         ]
         self.nodedata_lbl = QLabel('<b>NodeData</b>')
 
@@ -261,16 +287,34 @@ class GDMain(QMainWindow):
             self.dotype_data_summary_lbl,
             self.dotype_data_summary_edit
         ]
-
         node_data_isenable_list = [
             self.nodedata_add_btn,
             self.nodedata_del_btn,
             self.nodedata_insert_btn,
             self.nodedata_remove_btn
         ]
-
         self.isWidgetVisible(node_data_isvisiable_list, False)
         self.isWidgetEnable(node_data_isenable_list, False)
+
+        self.node_data_lbls_list = [
+            self.dotype_data_lbl1,
+            self.dotype_data_lbl2,
+            self.dotype_data_lbl3,
+            self.dotype_data_lbl4,
+            self.dotype_data_lbl5,
+            self.dotype_data_summary_lbl
+        ]
+
+        self.node_data_edits_list = [
+            self.dotype_data_edit1,
+            self.dotype_data_edit2,
+            self.dotype_data_edit3,
+            self.dotype_data_edit4,
+            self.dotype_data_edit5,
+            self.dotype_data_summary_edit
+        ]
+
+        self.dotype_cb.currentIndexChanged.connect(self.changeNodeDataByType)
 
     def initJsonView(self):
         # 设置引导文本显示相关
@@ -521,3 +565,744 @@ class GDMain(QMainWindow):
         else:
             for widget in widgets:
                 widget.setVisible(isVisible)
+
+    def changeTriggerDataByType(self):
+        if self.trigger_type_cb.currentText() == "-- 请选择触发器类型 --":
+            # print(self.trigger_type_cb.currentText())
+            for lbl in self.trigger_data_lbls_list:
+                lbl.setVisible(False)
+            for edit in self.trigger_data_edits_list:
+                edit.setVisible(False)
+
+        elif self.trigger_type_cb.currentText() == "OpenPanel":
+            self.trigger_data_lbls_list[0].setText('PanelName')
+            self.trigger_data_lbls_list[0].setVisible(True)
+            self.trigger_data_lbls_list[1].setVisible(False)
+            self.trigger_data_lbls_list[2].setVisible(False)
+            self.trigger_data_edits_list[0].setVisible(True)
+            self.trigger_data_edits_list[1].setVisible(False)
+            self.trigger_data_edits_list[2].setVisible(False)
+
+        elif self.trigger_type_cb.currentText() == "OpenArea":
+            self.trigger_data_lbls_list[0].setText('MapId')
+            self.trigger_data_lbls_list[0].setVisible(True)
+            self.trigger_data_lbls_list[1].setText('AreaId')
+            self.trigger_data_lbls_list[1].setVisible(True)
+            self.trigger_data_lbls_list[2].setVisible(False)
+            self.trigger_data_edits_list[0].setVisible(True)
+            self.trigger_data_edits_list[1].setVisible(True)
+            self.trigger_data_edits_list[2].setVisible(False)
+
+        elif self.trigger_type_cb.currentText() == "NPCClick":
+            self.trigger_data_lbls_list[0].setText('NPCId')
+            self.trigger_data_lbls_list[0].setVisible(True)
+            self.trigger_data_lbls_list[1].setVisible(False)
+            self.trigger_data_lbls_list[2].setVisible(False)
+            self.trigger_data_edits_list[0].setVisible(True)
+            self.trigger_data_edits_list[1].setVisible(False)
+            self.trigger_data_edits_list[2].setVisible(False)
+
+        elif self.trigger_type_cb.currentText() == "GuideCompleted":
+            self.trigger_data_lbls_list[0].setText('GuideName')
+            self.trigger_data_lbls_list[0].setVisible(True)
+            self.trigger_data_lbls_list[1].setVisible(False)
+            self.trigger_data_lbls_list[2].setVisible(False)
+            self.trigger_data_edits_list[0].setVisible(True)
+            self.trigger_data_edits_list[1].setVisible(False)
+            self.trigger_data_edits_list[2].setVisible(False)
+
+        elif self.trigger_type_cb.currentText() == "ArrivalNode":
+            self.trigger_data_lbls_list[0].setText('Nodes')
+            self.trigger_data_lbls_list[0].setVisible(True)
+            self.trigger_data_lbls_list[1].setVisible(False)
+            self.trigger_data_lbls_list[2].setVisible(False)
+            self.trigger_data_edits_list[0].setVisible(True)
+            self.trigger_data_edits_list[1].setVisible(False)
+            self.trigger_data_edits_list[2].setVisible(False)
+
+        elif self.trigger_type_cb.currentText() == "PassingNode":
+            self.trigger_data_lbls_list[0].setText('Nodes')
+            self.trigger_data_lbls_list[0].setVisible(True)
+            self.trigger_data_lbls_list[1].setVisible(False)
+            self.trigger_data_lbls_list[2].setVisible(False)
+            self.trigger_data_edits_list[0].setVisible(True)
+            self.trigger_data_edits_list[1].setVisible(False)
+            self.trigger_data_edits_list[2].setVisible(False)
+
+        elif self.trigger_type_cb.currentText() == "LoginSuccess":
+            for lbl in self.trigger_data_lbls_list:
+                lbl.setVisible(False)
+            for edit in self.trigger_data_edits_list:
+                edit.setVisible(False)
+
+        elif self.trigger_type_cb.currentText() == "UIClick":
+            self.trigger_data_lbls_list[0].setText('UIName')
+            self.trigger_data_lbls_list[0].setVisible(True)
+            self.trigger_data_lbls_list[1].setVisible(False)
+            self.trigger_data_lbls_list[2].setVisible(False)
+            self.trigger_data_edits_list[0].setVisible(True)
+            self.trigger_data_edits_list[1].setVisible(False)
+            self.trigger_data_edits_list[2].setVisible(False)
+
+        else:
+            pass
+
+    def changeConditionByType(self):
+        if self.pre_condition_type_edit.currentText() == '-- 请选择条件类型 --':
+            for lbl in self.pre_cond_data_lbls:
+                lbl.setVisible(False)
+            for edit in self.pre_cond_data_editss:
+                edit.setVisible(False)
+
+        elif self.pre_condition_type_edit.currentText() == 'GuideCompleted':
+            self.pre_cond_data_lbls[0].setText('GuideName')
+            self.pre_cond_data_lbls[0].setVisible(True)
+            self.pre_cond_data_lbls[1].setVisible(False)
+            self.pre_cond_data_lbls[1].setVisible(False)
+            self.pre_cond_data_edits[0].setVisible(True)
+            self.pre_cond_data_edits[1].setVisible(False)
+            self.pre_cond_data_edits[2].setVisible(False)
+
+        else:
+            pass
+
+    def changeNodeDataByType(self):
+        if self.dotype_cb.currentText() == '-- 请选择执行条件 --':
+            for lbl in self.node_data_lbls_list:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list:
+                edit.setVisible(False)
+
+
+        elif self.dotype_cb.currentText() == 'SetTips':
+            for lbl in self.node_data_lbls_list:
+                lbl.setVisible(True)
+            for edit in self.node_data_edits_list:
+                edit.setVisible(True)
+            self.node_data_lbls_list[0].setText('Text')
+            self.node_data_lbls_list[1].setText('Position')
+            self.node_data_lbls_list[2].setText('ShowFrame')
+            self.node_data_lbls_list[3].setText('AutoDisappear')
+            self.node_data_lbls_list[4].setText('Duration')
+
+
+        elif self.dotype_cb.currentText() == 'ClearTips':
+            for lbl in self.node_data_lbls_list[0:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[0:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'SetBlink':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Position')
+            self.node_data_lbls_list[1].setText('Rotation')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'HideMask':
+            for lbl in self.node_data_lbls_list[0:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[0:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'ShowMask':
+            for lbl in self.node_data_lbls_list[0:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[0:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'SetMaskAlpha':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Alpha')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'Highlight':
+            for lbl in self.node_data_lbls_list[3:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[3:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Panel')
+            self.node_data_lbls_list[1].setText('Objects')
+            self.node_data_lbls_list[2].setText('Order')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[2].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[2].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'ClearHighlight':
+            for lbl in self.node_data_lbls_list:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list:
+                edit.setVisible(False)
+
+        elif self.dotype_cb.currentText() == 'HideUIObject':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Panel')
+            self.node_data_lbls_list[1].setText('Objects')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'ShowUIObject':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Panel')
+            self.node_data_lbls_list[1].setText('Objects')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'ClearGuidePanel':
+            for lbl in self.node_data_lbls_list:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list:
+                edit.setVisible(False)
+
+        elif self.dotype_cb.currentText() == 'ShowPictures':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Paths')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'SetInteractableNames':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Names')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'SetInteractable':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Panel')
+            self.node_data_lbls_list[1].setText('Objects')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'WaitPanelOpen':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('PanelName')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'WaitPanelClose':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('PanelName')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'SetCanWalk':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NodeIds')
+            self.node_data_lbls_list[1].setText('CanWalk')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'SetMapActive':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Active')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'ShowNodeElement':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NodeIds')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'HideNodeElement':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NodeIds')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'EnableNodeEvent':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NodeIds')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'DisableNodeEvent':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NodeIds')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'LoadNpc':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NPCInfo')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'DestroyNPC':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NPCId')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'PlayAVG':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Name')
+            self.node_data_lbls_list[1].setText('StopBgm')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'EnterAdventure':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('AreaId')
+            self.node_data_lbls_list[1].setText('SectionId')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'Await':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('WaitTime')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'OpenUIPanel':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('PanelName')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'CloseUIPanel':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('PanelName')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'Teleport':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('MapId')
+            self.node_data_lbls_list[1].setText('NodeId')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'Complete':
+            for lbl in self.node_data_lbls_list[0:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[0:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'WaitAreaOpen':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('MapId')
+            self.node_data_lbls_list[1].setText('AreaId')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'WaitAreaClose':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('MapId')
+            self.node_data_lbls_list[1].setText('AreaId')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'WaitMoveTo':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('PassingNodes')
+            self.node_data_lbls_list[1].setText('ArrivalNodes')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'UnlockModule':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('Module')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'ShowSingleEffect':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('EffectName')
+            self.node_data_lbls_list[1].setText('OverridElements')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'EnterGame':
+            for lbl in self.node_data_lbls_list[0:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[0:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'LoadElement':
+            for lbl in self.node_data_lbls_list:
+                lbl.setVisible(True)
+            for edit in self.node_data_edits_list:
+                edit.setVisible(True)
+            self.node_data_lbls_list[0].setText('NodeId')
+            self.node_data_lbls_list[1].setText('ElementKey')
+            self.node_data_lbls_list[2].setText('Position')
+            self.node_data_lbls_list[3].setText('EulerAngles')
+            self.node_data_lbls_list[4].setText('Scale')
+
+        elif self.dotype_cb.currentText() == 'DefaultTeleport':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('TeleportTag')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'UnlockNewTeleport':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('TeleportTag')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'AddMapEvent':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NodeId')
+            self.node_data_lbls_list[1].setText('Data')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'ClearMapEvent':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NodeId')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'PlayVideo':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('ClipPath')
+            self.node_data_lbls_list[1].setText('CanSkip')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'PlayBgm':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('BgmName')
+            self.node_data_lbls_list[1].setText('Replay')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'PauseBgm':
+            for lbl in self.node_data_lbls_list[0:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[0:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'ChangeHero':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('SkinId')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'LockSkin':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('HeroSkinIds')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'UnlockSkin':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('HeroSkinIds')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'LockCardPackage':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('CardPackages')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'UnlockCardPackage':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('CardPackages')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'HeroEvolutionHideHero':
+            for lbl in self.node_data_lbls_list[2:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[2:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('HeroSkinIds')
+            self.node_data_lbls_list[1].setText('HeroIds')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'HideHeroThumbnail':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('HeroSkinIds')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'WaitEventCompleted':
+            for lbl in self.node_data_lbls_list[1:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[1:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NodeIds')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        elif self.dotype_cb.currentText() == 'SetElementAngle':
+            for lbl in self.node_data_lbls_list[3:-1]:
+                lbl.setVisible(False)
+            for edit in self.node_data_edits_list[3:-1]:
+                edit.setVisible(False)
+            self.node_data_lbls_list[0].setText('NodeId')
+            self.node_data_lbls_list[1].setText('Angle')
+            self.node_data_lbls_list[2].setText('Duration')
+            self.node_data_lbls_list[0].setVisible(True)
+            self.node_data_lbls_list[1].setVisible(True)
+            self.node_data_lbls_list[2].setVisible(True)
+            self.node_data_lbls_list[-1].setVisible(True)
+            self.node_data_edits_list[0].setVisible(True)
+            self.node_data_edits_list[1].setVisible(True)
+            self.node_data_edits_list[2].setVisible(True)
+            self.node_data_edits_list[-1].setVisible(True)
+
+        else:
+            pass
+
+
+
