@@ -39,43 +39,67 @@ class GDMain(QMainWindow):
         self.gd_name_input_edit = QLineEdit()
         self.gd_name_input_edit.setPlaceholderText('请输入引导节点名称')
         self.gd_name_add_btn = QPushButton('插入')
-        self.gd_name_add_btn.setEnabled(False)
-        self.gd_name_add_btn.clicked.connect(self.clickGDNameAdd)
         self.gd_name_del_btn = QPushButton('删除')
-        self.gd_name_del_btn.setEnabled(False)
+
+        gd_name_widgets = [
+            self.gd_name_add_btn,
+            self.gd_name_del_btn
+        ]
+
+        self.isWidgetEnable(gd_name_widgets, False)
+
+        self.gd_name_add_btn.clicked.connect(self.clickGDNameAdd)
         self.gd_name_del_btn.clicked.connect(self.clickGDNameDel)
         self.gd_name_input_edit.textChanged.connect(self.changeGDNameInputByLineText)
 
     def initTriggers(self):
         # 设置引导节点触发器与触发器相关
-        trigger_types = []
+        trigger_types = [
+            "-- 请选择触发器类型 --",
+            "1.OpenPanel",
+            "2.OpenArea",
+            "3.NPCClick",
+            "4.GuideCompleted",
+            "5.ArrivalNode",
+            "6.PassingNode",
+            "7.LoginSuccess",
+            "8.UIClick"
+        ]
         self.triggers_lbl = QLabel('<b>Triggers</b>')
         self.triggers_data_lbl = QLabel('Data')
         self.trigger_type_lbl = QLabel('TriggerType')
         self.trigger_type_cb = QComboBox()
-        self.trigger_type_cb.addItem('-- 请选择触发器类型 --')
-        # self.trigger_type_cb.addItems()
-        # self.trigger_type_cb.setPlaceholderText('请选择引导触发器类型')
+        self.trigger_type_cb.addItems(trigger_types)
+        self.trigger_type_cb.setMaxVisibleItems(5)
         self.trigger_data_lbl1 = QLabel('content1')
-        self.trigger_data_lbl1.setVisible(False)
         self.trigger_data_lineedit1 = QLineEdit()
-        self.trigger_data_lineedit1.setVisible(False)
         self.trigger_data_lbl2 = QLabel('content2')
-        self.trigger_data_lbl2.setVisible(False)
         self.trigger_data_lineedit2 = QLineEdit()
-        self.trigger_data_lineedit2.setVisible(False)
         self.trigger_data_lbl3 = QLabel('content3')
-        self.trigger_data_lbl3.setVisible(False)
         self.trigger_data_lineedit3 = QLineEdit()
-        self.trigger_data_lineedit3.setVisible(False)
+
+        trigger_widgets = [
+            self.trigger_data_lbl1,
+            self.trigger_data_lineedit1,
+            self.trigger_data_lbl2,
+            self.trigger_data_lineedit2,
+            self.trigger_data_lbl3,
+            self.trigger_data_lineedit3
+        ]
+        self.isWidgetVisible(trigger_widgets, False)
+
         self.trigger_add_btn = QPushButton('添加')
-        self.trigger_add_btn.setEnabled(False)
         self.trigger_del_btn = QPushButton('删除')
-        self.trigger_del_btn.setEnabled(False)
         self.trigger_insert_btn = QPushButton('插入')
-        self.trigger_insert_btn.setEnabled(False)
         self.trigger_remove_btn = QPushButton('移除')
-        self.trigger_remove_btn.setEnabled(False)
+
+        trigger_btns = [
+            self.trigger_add_btn,
+            self.trigger_del_btn,
+            self.trigger_insert_btn,
+            self.trigger_remove_btn
+        ]
+        self.isWidgetEnable(trigger_btns, False)
 
     def initConditional(self):
         # 设置引导前置条件触发器相关
@@ -88,6 +112,7 @@ class GDMain(QMainWindow):
         self.pre_condition_type_lbl.setEnabled(False)
         self.pre_condition_type_edit = QComboBox()
         self.pre_condition_type_edit.addItem('-- 请选择条件类型 --')
+        self.pre_condition_type_edit.addItem('1.GuideCompleted')
         self.pre_condition_type_edit.setEnabled(False)
 
         # self.pre_condition_type_edit.setPlaceholderText('请选择引导前置条件类型')
@@ -118,6 +143,62 @@ class GDMain(QMainWindow):
 
     def initNodeData(self):
         # 设置NodeData相关空间
+        node_data_types = [
+            "-- 请选择执行条件 --",
+            "1.SetTips",
+            "2.ClearTips",
+            "3.SetBlink",
+            "4.HideMask",
+            "5.ShowMask",
+            "6.SetMaskAlpha",
+            "7.Highlight",
+            "8.ClearHighlight",
+            "9.HideUIObject",
+            "10.ShowUIObject",
+            "11.ClearGuidePanel",
+            "12.ShowPictures",
+            "13.SetInteractableNames",
+            "14.SetInteractable",
+            "15.WaitPanelOpen",
+            "16.WaitPanelClose",
+            "17.SetCanWalk",
+            "18.SetMapActive",
+            "19.ShowNodeElement",
+            "20.HideNodeElement",
+            "21.EnableNodeEvent",
+            "22.DisableNodeEvent",
+            "23.LoadNpc",
+            "24.DestroyNPC",
+            "25.PlayAVG",
+            "26.EnterAdventure",
+            "27.Await",
+            "28.OpenUIPanel",
+            "29.CloseUIPanel",
+            "30.Teleport",
+            "31.Complete",
+            "32.WaitAreaOpen",
+            "33.WaitAreaClose",
+            "34.WaitMoveTo",
+            "35.UnlockModule",
+            "36.ShowSingleEffect",
+            "37.EnterGame",
+            "38.LoadElement",
+            "39.DefaultTeleport",
+            "40.UnlockNewTeleport",
+            "41.AddMapEvent",
+            "42.ClearMapEvent",
+            "43.PlayVideo",
+            "44.PlayBgm",
+            "45.PauseBgm",
+            "46.ChangeHero",
+            "47.LockSkin",
+            "48.UnlockSkin",
+            "49.LockCardPackage",
+            "50.UnlockCardPackage",
+            "51.HeroEvolutionHideHero",
+            "52.HideHeroThumbnail",
+            "53.WaitEventCompleted"
+        ]
         self.nodedata_lbl = QLabel('<b>NodeData</b>')
 
         self.is_click_to_next_lbl = QLabel('IsClickToNext')
@@ -136,7 +217,8 @@ class GDMain(QMainWindow):
 
         self.dotype_lbl = QLabel('DoType')
         self.dotype_cb = QComboBox()
-        self.dotype_cb.addItem('-- 请选择执行条件 --')
+        self.dotype_cb.addItems(node_data_types)
+        self.dotype_cb.setMaxVisibleItems(10)
         # self.dotype_cb.setPlaceholderText('请选择引导执行效果')
 
         self.dotype_data_lbl1 = QLabel('content1')
@@ -409,5 +491,16 @@ class GDMain(QMainWindow):
 
         return main_hbox
 
+    def isWidgetEnable(self, widgets: list, isEnable: bool):
+        if widgets == []:
+            pass
+        else:
+            for widget in widgets:
+                widget.setEnabled(isEnable)
 
-
+    def isWidgetVisible(self, widgets: list, isVisible: bool):
+        if widgets == []:
+            pass
+        else:
+            for widget in widgets:
+                widget.setEnabled(isVisible)
