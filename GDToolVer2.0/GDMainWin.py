@@ -113,6 +113,13 @@ class GDMain(QMainWindow):
             self.trigger_data_lineedit3
         ]
 
+        self.trigger_data_btns_list = [
+            self.trigger_add_btn,
+            self.trigger_del_btn,
+            self.trigger_insert_btn,
+            self.trigger_remove_btn
+        ]
+
         self.trigger_type_cb.currentIndexChanged.connect(self.changeTriggerDataByType)
 
     def initConditional(self):
@@ -170,6 +177,13 @@ class GDMain(QMainWindow):
             self.pre_condition_data_edit1,
             self.pre_condition_data_edit2,
             self.pre_condition_data_edit3
+        ]
+
+        self.pre_cond_data_btns = [
+            self.pre_add_btn,
+            self.pre_del_btn,
+            self.pre_insert_btn,
+            self.pre_remove_btn
         ]
 
         self.pre_condition_type_edit.currentIndexChanged.connect(self.changeConditionByType)
@@ -312,6 +326,13 @@ class GDMain(QMainWindow):
             self.dotype_data_edit4,
             self.dotype_data_edit5,
             self.dotype_data_summary_edit
+        ]
+
+        self.node_data_btns_list = [
+            self.nodedata_add_btn,
+            self.nodedata_del_btn,
+            self.nodedata_insert_btn,
+            self.nodedata_remove_btn
         ]
 
         self.dotype_cb.currentIndexChanged.connect(self.changeNodeDataByType)
@@ -573,6 +594,8 @@ class GDMain(QMainWindow):
                 lbl.setVisible(False)
             for edit in self.trigger_data_edits_list:
                 edit.setVisible(False)
+            for btn in self.trigger_data_btns_list:
+                btn.setEnabled(False)
 
         elif self.trigger_type_cb.currentText() == "OpenPanel":
             self.trigger_data_lbls_list[0].setText('PanelName')
@@ -654,6 +677,9 @@ class GDMain(QMainWindow):
             for edit in self.pre_cond_data_editss:
                 edit.setVisible(False)
 
+            for btn in self.pre_cond_data_btns:
+                btn.setEnabled(False)
+
         elif self.pre_condition_type_edit.currentText() == 'GuideCompleted':
             self.pre_cond_data_lbls[0].setText('GuideName')
             self.pre_cond_data_lbls[0].setVisible(True)
@@ -672,6 +698,9 @@ class GDMain(QMainWindow):
                 lbl.setVisible(False)
             for edit in self.node_data_edits_list:
                 edit.setVisible(False)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(False)
 
 
         elif self.dotype_cb.currentText() == 'SetTips':
