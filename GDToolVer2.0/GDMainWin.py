@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from GuideTypes import *
 import json
 
 
@@ -54,17 +55,6 @@ class GDMain(QMainWindow):
 
     def initTriggers(self):
         # 设置引导节点触发器与触发器相关
-        trigger_types = [
-            "-- 请选择触发器类型 --",
-            "OpenPanel",
-            "OpenArea",
-            "NPCClick",
-            "GuideCompleted",
-            "ArrivalNode",
-            "PassingNode",
-            "LoginSuccess",
-            "UIClick"
-        ]
         self.triggers_lbl = QLabel('<b>Triggers</b>')
         self.triggers_data_lbl = QLabel('Data')
         self.trigger_type_lbl = QLabel('TriggerType')
@@ -190,63 +180,6 @@ class GDMain(QMainWindow):
 
     def initNodeData(self):
         # 设置NodeData相关空间
-        node_data_types = [
-            "-- 请选择执行条件 --",
-            "SetTips",
-            "ClearTips",
-            "SetBlink",
-            "HideMask",
-            "ShowMask",
-            "SetMaskAlpha",
-            "Highlight",
-            "ClearHighlight",
-            "HideUIObject",
-            "ShowUIObject",
-            "ClearGuidePanel",
-            "ShowPictures",
-            "SetInteractableNames",
-            "SetInteractable",
-            "WaitPanelOpen",
-            "WaitPanelClose",
-            "SetCanWalk",
-            "SetMapActive",
-            "ShowNodeElement",
-            "HideNodeElement",
-            "EnableNodeEvent",
-            "DisableNodeEvent",
-            "LoadNpc",
-            "DestroyNPC",
-            "PlayAVG",
-            "EnterAdventure",
-            "Await",
-            "OpenUIPanel",
-            "CloseUIPanel",
-            "Teleport",
-            "Complete",
-            "WaitAreaOpen",
-            "WaitAreaClose",
-            "WaitMoveTo",
-            "UnlockModule",
-            "ShowSingleEffect",
-            "EnterGame",
-            "LoadElement",
-            "DefaultTeleport",
-            "UnlockNewTeleport",
-            "AddMapEvent",
-            "ClearMapEvent",
-            "PlayVideo",
-            "PlayBgm",
-            "PauseBgm",
-            "ChangeHero",
-            "LockSkin",
-            "UnlockSkin",
-            "LockCardPackage",
-            "UnlockCardPackage",
-            "HeroEvolutionHideHero",
-            "HideHeroThumbnail",
-            "WaitEventCompleted",
-            "SetElementAngle"
-        ]
         self.nodedata_lbl = QLabel('<b>NodeData</b>')
 
         self.is_click_to_next_lbl = QLabel('IsClickToNext')
