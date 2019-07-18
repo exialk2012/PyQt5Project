@@ -49,11 +49,12 @@ class GDMain(QMainWindow):
 
         self.isWidgetEnable(gd_name_widgets, False)
 
-        self.gd_name_add_btn.clicked.connect(self.clickGDNameAdd)
+        self.gd_name_add_btn.clicked.connect(self.addData)
         self.gd_name_del_btn.clicked.connect(self.clickGDNameDel)
         self.gd_name_input_edit.textChanged.connect(self.changeGDNameInputByLineText)
 
     def initTriggers(self):
+        self.trigger_data_list = []
         # 设置引导节点触发器与触发器相关
         self.triggers_lbl = QLabel('<b>Triggers</b>')
         self.triggers_data_lbl = QLabel('Data')
@@ -111,6 +112,7 @@ class GDMain(QMainWindow):
         ]
 
         self.trigger_type_cb.currentIndexChanged.connect(self.changeTriggerDataByType)
+        self.trigger_add_btn.clicked.connect(self.addData)
 
     def initConditional(self):
         # 设置引导前置条件触发器相关
@@ -176,7 +178,10 @@ class GDMain(QMainWindow):
             self.pre_remove_btn
         ]
 
+        self.condition_data_list = []
+
         self.pre_condition_type_edit.currentIndexChanged.connect(self.changeConditionByType)
+        self.pre_add_btn.clicked.connect(self.addData)
 
     def initNodeData(self):
         # 设置NodeData相关空间
@@ -268,7 +273,13 @@ class GDMain(QMainWindow):
             self.nodedata_remove_btn
         ]
 
+        self.node_data_list = []
+        self.node_data_dotype_list = []
+
+
         self.dotype_cb.currentIndexChanged.connect(self.changeNodeDataByType)
+        self.nodedata_add_btn.clicked.connect(self.addData)
+        self.nodedata_insert_btn.clicked.connect(self.addData)
 
     def initJsonView(self):
         # 设置引导文本显示相关
@@ -293,10 +304,10 @@ class GDMain(QMainWindow):
         self.gd_name_input_edit.clear()
         self.statusBar().showMessage('已删除引导节点名', 3000)
 
-    def clickGDNameAdd(self):
-        self.gd_node_content.update(GuideName=self.gd_name_input_edit.text())
-        self.gd_node_view.setText(str(self.gd_node_content))
-        self.statusBar().showMessage('添加引导名称成功', 3000)
+    # def clickGDNameAdd(self):
+    #     self.gd_node_content.update(GuideName=self.gd_name_input_edit.text())
+    #     self.gd_node_view.setText(str(self.gd_node_content))
+    #     self.statusBar().showMessage('添加引导名称成功', 3000)
 
     def clickGDJsonSave(self):
         if self.gd_node_view.toPlainText() != '' and self.gd_name_input_edit.text() != '':
@@ -539,6 +550,9 @@ class GDMain(QMainWindow):
             self.trigger_data_edits_list[1].setVisible(False)
             self.trigger_data_edits_list[2].setVisible(False)
 
+            for btn in self.trigger_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.trigger_type_cb.currentText() == "OpenArea":
             self.trigger_data_lbls_list[0].setText('MapId')
             self.trigger_data_lbls_list[0].setVisible(True)
@@ -549,6 +563,9 @@ class GDMain(QMainWindow):
             self.trigger_data_edits_list[1].setVisible(True)
             self.trigger_data_edits_list[2].setVisible(False)
 
+            for btn in self.trigger_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.trigger_type_cb.currentText() == "NPCClick":
             self.trigger_data_lbls_list[0].setText('NPCId')
             self.trigger_data_lbls_list[0].setVisible(True)
@@ -557,6 +574,9 @@ class GDMain(QMainWindow):
             self.trigger_data_edits_list[0].setVisible(True)
             self.trigger_data_edits_list[1].setVisible(False)
             self.trigger_data_edits_list[2].setVisible(False)
+
+            for btn in self.trigger_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.trigger_type_cb.currentText() == "GuideCompleted":
             self.trigger_data_lbls_list[0].setText('GuideName')
@@ -567,6 +587,9 @@ class GDMain(QMainWindow):
             self.trigger_data_edits_list[1].setVisible(False)
             self.trigger_data_edits_list[2].setVisible(False)
 
+            for btn in self.trigger_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.trigger_type_cb.currentText() == "ArrivalNode":
             self.trigger_data_lbls_list[0].setText('Nodes')
             self.trigger_data_lbls_list[0].setVisible(True)
@@ -575,6 +598,9 @@ class GDMain(QMainWindow):
             self.trigger_data_edits_list[0].setVisible(True)
             self.trigger_data_edits_list[1].setVisible(False)
             self.trigger_data_edits_list[2].setVisible(False)
+
+            for btn in self.trigger_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.trigger_type_cb.currentText() == "PassingNode":
             self.trigger_data_lbls_list[0].setText('Nodes')
@@ -585,11 +611,17 @@ class GDMain(QMainWindow):
             self.trigger_data_edits_list[1].setVisible(False)
             self.trigger_data_edits_list[2].setVisible(False)
 
+            for btn in self.trigger_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.trigger_type_cb.currentText() == "LoginSuccess":
             for lbl in self.trigger_data_lbls_list:
                 lbl.setVisible(False)
             for edit in self.trigger_data_edits_list:
                 edit.setVisible(False)
+
+            for btn in self.trigger_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.trigger_type_cb.currentText() == "UIClick":
             self.trigger_data_lbls_list[0].setText('UIName')
@@ -599,6 +631,9 @@ class GDMain(QMainWindow):
             self.trigger_data_edits_list[0].setVisible(True)
             self.trigger_data_edits_list[1].setVisible(False)
             self.trigger_data_edits_list[2].setVisible(False)
+
+            for btn in self.trigger_data_btns_list:
+                btn.setEnabled(True)
 
         else:
             pass
@@ -621,6 +656,9 @@ class GDMain(QMainWindow):
             self.pre_cond_data_edits[0].setVisible(True)
             self.pre_cond_data_edits[1].setVisible(False)
             self.pre_cond_data_edits[2].setVisible(False)
+
+            for btn in self.pre_cond_data_btns:
+                btn.setEnabled(True)
 
         else:
             pass
@@ -647,6 +685,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[3].setText('AutoDisappear')
             self.node_data_lbls_list[4].setText('Duration')
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
 
         elif self.dotype_cb.currentText() == 'ClearTips':
             for lbl in self.node_data_lbls_list[0:-1]:
@@ -655,6 +696,9 @@ class GDMain(QMainWindow):
                 edit.setVisible(False)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'SetBlink':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -670,6 +714,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'HideMask':
             for lbl in self.node_data_lbls_list[0:-1]:
                 lbl.setVisible(False)
@@ -678,6 +725,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'ShowMask':
             for lbl in self.node_data_lbls_list[0:-1]:
                 lbl.setVisible(False)
@@ -685,6 +735,9 @@ class GDMain(QMainWindow):
                 edit.setVisible(False)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'SetMaskAlpha':
             for lbl in self.node_data_lbls_list[1:-1]:
@@ -696,6 +749,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'Highlight':
             for lbl in self.node_data_lbls_list[3:-1]:
@@ -714,11 +770,17 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[2].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'ClearHighlight':
             for lbl in self.node_data_lbls_list:
                 lbl.setVisible(False)
             for edit in self.node_data_edits_list:
                 edit.setVisible(False)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'HideUIObject':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -734,6 +796,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'ShowUIObject':
             for lbl in self.node_data_lbls_list[2:-1]:
                 lbl.setVisible(False)
@@ -748,11 +813,17 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'ClearGuidePanel':
             for lbl in self.node_data_lbls_list:
                 lbl.setVisible(False)
             for edit in self.node_data_edits_list:
                 edit.setVisible(False)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'ShowPictures':
             for lbl in self.node_data_lbls_list[1:-1]:
@@ -765,6 +836,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'SetInteractableNames':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -775,6 +849,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'SetInteractable':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -790,6 +867,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'WaitPanelOpen':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -801,6 +881,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'WaitPanelClose':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -811,6 +894,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'SetCanWalk':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -826,6 +912,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'SetMapActive':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -836,6 +925,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'ShowNodeElement':
             for lbl in self.node_data_lbls_list[1:-1]:
@@ -848,6 +940,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'HideNodeElement':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -858,6 +953,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'EnableNodeEvent':
             for lbl in self.node_data_lbls_list[1:-1]:
@@ -870,6 +968,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'DisableNodeEvent':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -880,6 +981,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'LoadNpc':
             for lbl in self.node_data_lbls_list[1:-1]:
@@ -892,6 +996,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'DestroyNPC':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -902,6 +1009,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'PlayAVG':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -917,6 +1027,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'EnterAdventure':
             for lbl in self.node_data_lbls_list[2:-1]:
                 lbl.setVisible(False)
@@ -931,6 +1044,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'Await':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -941,6 +1057,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'OpenUIPanel':
             for lbl in self.node_data_lbls_list[1:-1]:
@@ -953,6 +1072,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'CloseUIPanel':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -963,6 +1085,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'Teleport':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -978,6 +1103,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'Complete':
             for lbl in self.node_data_lbls_list[0:-1]:
                 lbl.setVisible(False)
@@ -985,6 +1113,9 @@ class GDMain(QMainWindow):
                 edit.setVisible(False)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'WaitAreaOpen':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -1000,6 +1131,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'WaitAreaClose':
             for lbl in self.node_data_lbls_list[2:-1]:
                 lbl.setVisible(False)
@@ -1013,6 +1147,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'WaitMoveTo':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -1028,6 +1165,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'UnlockModule':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -1038,6 +1178,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'ShowSingleEffect':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -1053,6 +1196,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'EnterGame':
             for lbl in self.node_data_lbls_list[0:-1]:
                 lbl.setVisible(False)
@@ -1060,6 +1206,9 @@ class GDMain(QMainWindow):
                 edit.setVisible(False)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'LoadElement':
             for lbl in self.node_data_lbls_list:
@@ -1072,6 +1221,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[3].setText('EulerAngles')
             self.node_data_lbls_list[4].setText('Scale')
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'DefaultTeleport':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -1083,6 +1235,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'UnlockNewTeleport':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -1093,6 +1248,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'AddMapEvent':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -1108,6 +1266,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'ClearMapEvent':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -1118,6 +1279,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'PlayVideo':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -1133,6 +1297,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'PlayBgm':
             for lbl in self.node_data_lbls_list[2:-1]:
                 lbl.setVisible(False)
@@ -1147,6 +1314,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'PauseBgm':
             for lbl in self.node_data_lbls_list[0:-1]:
                 lbl.setVisible(False)
@@ -1154,6 +1324,9 @@ class GDMain(QMainWindow):
                 edit.setVisible(False)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'ChangeHero':
             for lbl in self.node_data_lbls_list[1:-1]:
@@ -1166,6 +1339,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'LockSkin':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -1176,6 +1352,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'UnlockSkin':
             for lbl in self.node_data_lbls_list[1:-1]:
@@ -1188,6 +1367,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'LockCardPackage':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -1199,6 +1381,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'UnlockCardPackage':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -1209,6 +1394,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'HeroEvolutionHideHero':
             for lbl in self.node_data_lbls_list[2:-1]:
@@ -1224,6 +1412,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'HideHeroThumbnail':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -1235,6 +1426,9 @@ class GDMain(QMainWindow):
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         elif self.dotype_cb.currentText() == 'WaitEventCompleted':
             for lbl in self.node_data_lbls_list[1:-1]:
                 lbl.setVisible(False)
@@ -1245,6 +1439,9 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[0].setVisible(True)
             self.node_data_lbls_list[-1].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
+
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
 
         elif self.dotype_cb.currentText() == 'SetElementAngle':
             for lbl in self.node_data_lbls_list[3:-1]:
@@ -1263,8 +1460,55 @@ class GDMain(QMainWindow):
             self.node_data_edits_list[2].setVisible(True)
             self.node_data_edits_list[-1].setVisible(True)
 
+            for btn in self.node_data_btns_list:
+                btn.setEnabled(True)
+
         else:
             pass
 
+    def addData(self):
+        sender = self.sender()
+
+        if sender == self.gd_name_add_btn:
+            self.gd_node_content.update(GuideName=self.gd_name_input_edit.text())
+            self.gd_node_view.setText(str(self.gd_node_content))
+            self.statusBar().showMessage('添加引导名称成功', 3000)
+
+        elif sender == self.trigger_add_btn:
+            trigger_first_dict = {}
+            trigger_second_dict = {}
+            trigger_second_dict["TriggerType"] = self.trigger_type_cb.currentText()
+
+            if self.trigger_type_cb.currentText() in ['OpenPanel','NPCClick','GuideCompleted','ArrivalNode','PassingNode','UIClick']:
+                trigger_second_dict[self.trigger_data_lbl1.text()] = self.trigger_data_lineedit1.text()
+
+            elif self.trigger_type_cb.currentText() == 'OpenArea':
+                trigger_second_dict[self.trigger_data_lbl1.text()] = self.trigger_data_lineedit1.text()
+                trigger_second_dict[self.trigger_data_lbl2.text()] = self.trigger_data_lineedit2.text()
+
+            else:
+                pass
+            trigger_first_dict["Data"] = trigger_second_dict
+            self.trigger_data_list.append(trigger_first_dict)
+            self.gd_node_content.update(Triggers=self.trigger_data_list)
+            self.gd_node_view.setText(str(self.gd_node_content))
+            self.statusBar().showMessage('添加引导触发器成功', 3000)
+
+        elif sender == self.pre_add_btn:
+            self.gd_node_content.update(Preconditions=self.condition_data_list)
+            self.gd_node_view.setText(str(self.gd_node_content))
+            self.statusBar().showMessage('添加引导条件成功', 3000)
+
+        elif sender == self.nodedata_add_btn:
+            node_data_first_dict = {}
+
+            self.gd_node_content.update(NodeData=self.node_data_list)
+            self.gd_node_view.setText(str(self.gd_node_content))
+            self.statusBar().showMessage('添加引导执行效果成功', 3000)
+
+        elif sender == self.nodedata_insert_btn:
+            node_data_second_dict = {}
 
 
+        else:
+            pass
