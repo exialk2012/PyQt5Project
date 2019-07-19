@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -796,4 +797,3 @@ class Ui_MainWindow(object):
         self.menu.setTitle(_translate("MainWindow", "菜单"))
         self.actionSave_s.setText(_translate("MainWindow", "Save(&s)"))
         self.actionQuit_q.setText(_translate("MainWindow", "Quit(&q)"))
-
