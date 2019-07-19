@@ -17,7 +17,7 @@
    <double>1.000000000000000</double>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QTabWidget" name="gd_type_tab">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -42,29 +42,28 @@
         <height>621</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_27">
+      <layout class="QHBoxLayout" name="gd_main_hbox">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_10">
+        <layout class="QVBoxLayout" name="gd_data_edit_vbox">
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout">
+          <layout class="QVBoxLayout" name="verticalLayout"/>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
-              <widget class="QLabel" name="label">
-               <property name="text">
-                <string>GuideName</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lineEdit"/>
-             </item>
-            </layout>
+            <widget class="QLabel" name="gd_name_lbl">
+             <property name="text">
+              <string>GuideName</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="gd_name_edit"/>
            </item>
           </layout>
          </item>
          <item>
-          <widget class="Line" name="line_2">
+          <widget class="Line" name="gd_name_hline">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -79,56 +78,56 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_2">
                  <item>
-                  <widget class="QLabel" name="label_2">
+                  <widget class="QLabel" name="gd_tri_lbl">
                    <property name="text">
                     <string>TriggerType</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox"/>
+                  <widget class="QComboBox" name="gd_tri_type_cbox"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
-                  <widget class="QLabel" name="label_3">
+                  <widget class="QLabel" name="gd_tri_cont1_lbl">
                    <property name="text">
                     <string>content1</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_2"/>
+                  <widget class="QLineEdit" name="gd_tri_cont1_edit"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_4">
                  <item>
-                  <widget class="QLabel" name="label_4">
+                  <widget class="QLabel" name="gd_tri_cont2_lbl">
                    <property name="text">
                     <string>content2</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_3"/>
+                  <widget class="QLineEdit" name="gd_tri_cont2_edit"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_5">
                  <item>
-                  <widget class="QLabel" name="label_5">
+                  <widget class="QLabel" name="gd_tri_cont3_lbl">
                    <property name="text">
                     <string>content3</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_4"/>
+                  <widget class="QLineEdit" name="gd_tri_cont3_edit"/>
                  </item>
                 </layout>
                </item>
@@ -137,10 +136,10 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_5">
                <item>
-                <widget class="QTreeWidget" name="treeWidget">
+                <widget class="QTreeWidget" name="gd_tri_data_tree">
                  <column>
                   <property name="text">
-                   <string notr="true">1</string>
+                   <string notr="true">TriggerDataIndex</string>
                   </property>
                  </column>
                 </widget>
@@ -148,14 +147,14 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_18">
                  <item>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="gd_tri_input_btn">
                    <property name="text">
                     <string>插入</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_2">
+                  <widget class="QPushButton" name="gd_tri_remove_btn">
                    <property name="text">
                     <string>移除</string>
                    </property>
@@ -168,7 +167,7 @@
             </layout>
            </item>
            <item>
-            <widget class="Line" name="line">
+            <widget class="Line" name="gd_tri_and_cond_vline">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -179,7 +178,7 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_3">
                <item>
-                <widget class="QCheckBox" name="checkBox">
+                <widget class="QCheckBox" name="gd_cond_isenable_check">
                  <property name="text">
                   <string>IsEnable</string>
                  </property>
@@ -188,56 +187,56 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_6">
                  <item>
-                  <widget class="QLabel" name="label_6">
+                  <widget class="QLabel" name="gd_cond_type_lbl">
                    <property name="text">
                     <string>ConditionType</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_2"/>
+                  <widget class="QComboBox" name="gd_cond_type_box"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_7">
                  <item>
-                  <widget class="QLabel" name="label_7">
+                  <widget class="QLabel" name="gd_cond_cont1_lbl">
                    <property name="text">
                     <string>content1</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_5"/>
+                  <widget class="QLineEdit" name="gd_cond_cont1_edit"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_8">
                  <item>
-                  <widget class="QLabel" name="label_8">
+                  <widget class="QLabel" name="gd_cond_cont2_lbl">
                    <property name="text">
                     <string>content2</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_6"/>
+                  <widget class="QLineEdit" name="gd_cond_cont2_edit"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_9">
                  <item>
-                  <widget class="QLabel" name="label_9">
+                  <widget class="QLabel" name="gd_cond_cont3_lbl">
                    <property name="text">
                     <string>content3</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_7"/>
+                  <widget class="QLineEdit" name="gd_cond_cont3_edit"/>
                  </item>
                 </layout>
                </item>
@@ -246,10 +245,10 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_6">
                <item>
-                <widget class="QTreeWidget" name="treeWidget_2">
+                <widget class="QTreeWidget" name="gd_cond_data_tree">
                  <column>
                   <property name="text">
-                   <string notr="true">1</string>
+                   <string notr="true">ConditionDataIndex</string>
                   </property>
                  </column>
                 </widget>
@@ -257,14 +256,14 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_20">
                  <item>
-                  <widget class="QPushButton" name="pushButton_3">
+                  <widget class="QPushButton" name="gd_cond_input_btn">
                    <property name="text">
                     <string>插入</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_4">
+                  <widget class="QPushButton" name="gd_cond_remove_btn">
                    <property name="text">
                     <string>移除</string>
                    </property>
@@ -279,7 +278,7 @@
           </layout>
          </item>
          <item>
-          <widget class="Line" name="line_3">
+          <widget class="Line" name="gd_tri_and_cond_hline">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -292,14 +291,14 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="0,10">
                <item>
-                <widget class="QLabel" name="label_10">
+                <widget class="QLabel" name="gd_nd_isclick_lbl">
                  <property name="text">
                   <string>IsClickToNext</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="comboBox_3">
+                <widget class="QComboBox" name="gd_nd_isclick_box">
                  <item>
                   <property name="text">
                    <string>false</string>
@@ -317,19 +316,19 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="0,10">
                <item>
-                <widget class="QLabel" name="label_11">
+                <widget class="QLabel" name="gd_nd_isauto_lbl">
                  <property name="text">
-                  <string>IsClickToNext</string>
+                  <string>IsAutoToNext</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="comboBox_4"/>
+                <widget class="QComboBox" name="gd_nd_isauto_box"/>
                </item>
               </layout>
              </item>
              <item>
-              <widget class="Line" name="line_4">
+              <widget class="Line" name="gd_dodata_isclick_and_isauto_hline">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -342,42 +341,42 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="0,10">
                    <item>
-                    <widget class="QLabel" name="label_12">
+                    <widget class="QLabel" name="gd_nd_dotype_lbl">
                      <property name="text">
                       <string>DoType</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="comboBox_5"/>
+                    <widget class="QComboBox" name="gd_nd_dotype_box"/>
                    </item>
                   </layout>
                  </item>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_13">
                    <item>
-                    <widget class="QLabel" name="label_13">
+                    <widget class="QLabel" name="gd_nd_cont1_lbl">
                      <property name="text">
                       <string>content1</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_8"/>
+                    <widget class="QLineEdit" name="gd_nd_cont1_edit"/>
                    </item>
                   </layout>
                  </item>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_14">
                    <item>
-                    <widget class="QLabel" name="label_14">
+                    <widget class="QLabel" name="gd_nd_cont2_lbl">
                      <property name="text">
                       <string>content2</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_9"/>
+                    <widget class="QLineEdit" name="gd_nd_cont2_edit"/>
                    </item>
                   </layout>
                  </item>
@@ -388,42 +387,42 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_15">
                    <item>
-                    <widget class="QLabel" name="label_15">
+                    <widget class="QLabel" name="gd_nd_cont3_lbl">
                      <property name="text">
                       <string>content3</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_10"/>
+                    <widget class="QLineEdit" name="gd_nd_cont3_edit"/>
                    </item>
                   </layout>
                  </item>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_16">
                    <item>
-                    <widget class="QLabel" name="label_16">
+                    <widget class="QLabel" name="gd_nd_cont4_lbl">
                      <property name="text">
                       <string>content4</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_11"/>
+                    <widget class="QLineEdit" name="gd_nd_cont4_edit"/>
                    </item>
                   </layout>
                  </item>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
                    <item>
-                    <widget class="QLabel" name="label_17">
+                    <widget class="QLabel" name="gd_nd_cont5_lbl">
                      <property name="text">
                       <string>content5</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_12"/>
+                    <widget class="QLineEdit" name="gd_nd_cont5_edit"/>
                    </item>
                   </layout>
                  </item>
@@ -436,10 +435,10 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
-              <widget class="QTreeWidget" name="treeWidget_3">
+              <widget class="QTreeWidget" name="gd_nd_tree">
                <column>
                 <property name="text">
-                 <string notr="true">1</string>
+                 <string notr="true">DoDataIndex</string>
                 </property>
                </column>
               </widget>
@@ -447,14 +446,14 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_22">
                <item>
-                <widget class="QPushButton" name="pushButton_5">
+                <widget class="QPushButton" name="gd_nd_input_btn">
                  <property name="text">
                   <string>插入</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_6">
+                <widget class="QPushButton" name="gd_nd_remove_btn">
                  <property name="text">
                   <string>移除</string>
                  </property>
@@ -469,35 +468,35 @@
         </layout>
        </item>
        <item>
-        <widget class="Line" name="line_6">
+        <widget class="Line" name="gd_preview_and_edit_vline">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_11">
+        <layout class="QVBoxLayout" name="gd_data_preview_vbox">
          <item>
-          <widget class="QLabel" name="label_18">
+          <widget class="QLabel" name="gd_pre_lbl">
            <property name="text">
             <string>PreView</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QTextEdit" name="textEdit"/>
+          <widget class="QTextEdit" name="gd_pre_edit"/>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_26">
+          <layout class="QHBoxLayout" name="gd_preview_create_and_clear_hbox">
            <item>
-            <widget class="QPushButton" name="pushButton_7">
+            <widget class="QPushButton" name="gd_pre_create_btn">
              <property name="text">
               <string>生成</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_8">
+            <widget class="QPushButton" name="gd_pre_clear_btn">
              <property name="text">
               <string>清空</string>
              </property>
@@ -506,14 +505,14 @@
           </layout>
          </item>
          <item>
-          <widget class="Line" name="line_5">
+          <widget class="Line" name="gd_preview_hline">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_9">
+          <widget class="QPushButton" name="gd_pre_save_btn">
            <property name="text">
             <string>保存</string>
            </property>
@@ -524,7 +523,7 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="help_data_tab">
      <attribute name="title">
       <string>HelpData</string>
      </attribute>
@@ -537,7 +536,7 @@
         <height>621</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_108">
+      <layout class="QHBoxLayout" name="help_main_hbox">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_39">
          <item>
@@ -550,7 +549,7 @@
                 <enum>QLayout::SetDefaultConstraint</enum>
                </property>
                <item>
-                <widget class="QLabel" name="label_27">
+                <widget class="QLabel" name="help_tri_lbl">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -572,14 +571,14 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_28">
                  <item>
-                  <widget class="QLabel" name="label_19">
+                  <widget class="QLabel" name="help_tri_type_lbl">
                    <property name="text">
                     <string>TriggerType</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_6">
+                  <widget class="QComboBox" name="help_tri_type_box">
                    <property name="toolTip">
                     <string/>
                    </property>
@@ -593,28 +592,28 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_29">
                  <item>
-                  <widget class="QLabel" name="label_20">
+                  <widget class="QLabel" name="help_tri_cont1_lbl">
                    <property name="text">
                     <string>content1</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_13"/>
+                  <widget class="QLineEdit" name="help_tri_cont1_edit"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_30">
                  <item>
-                  <widget class="QLabel" name="label_21">
+                  <widget class="QLabel" name="help_tri_cont2_lbl">
                    <property name="text">
                     <string>content2</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_14">
+                  <widget class="QLineEdit" name="help_tri_cont2_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -625,14 +624,14 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_31">
                  <item>
-                  <widget class="QLabel" name="label_22">
+                  <widget class="QLabel" name="help_tri_cont3_lbl">
                    <property name="text">
                     <string>content3</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_15">
+                  <widget class="QLineEdit" name="help_tri_cont3_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -645,19 +644,19 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_12">
                <item>
-                <widget class="QListWidget" name="listWidget"/>
+                <widget class="QListWidget" name="help_tri_data_tree"/>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_32">
                  <item>
-                  <widget class="QPushButton" name="pushButton_10">
+                  <widget class="QPushButton" name="help_tri_input_btn">
                    <property name="text">
                     <string>插入</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_11">
+                  <widget class="QPushButton" name="help_tri_remove_btn">
                    <property name="text">
                     <string>删除</string>
                    </property>
@@ -681,7 +680,7 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_14">
                <item>
-                <widget class="QLabel" name="label_28">
+                <widget class="QLabel" name="help_completecond_lbl">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -703,42 +702,42 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_35">
                  <item>
-                  <widget class="QLabel" name="label_23">
+                  <widget class="QLabel" name="help_cond_type_lbl">
                    <property name="text">
                     <string>ConditionType</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_7"/>
+                  <widget class="QComboBox" name="help_cond_type_box"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_36">
                  <item>
-                  <widget class="QLabel" name="label_24">
+                  <widget class="QLabel" name="help_cond_cont1_lbl">
                    <property name="text">
                     <string>content1</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_16"/>
+                  <widget class="QLineEdit" name="help_cond_cont1_edit"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_37">
                  <item>
-                  <widget class="QLabel" name="label_25">
+                  <widget class="QLabel" name="help_cond_cont2_lbl">
                    <property name="text">
                     <string>content2</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_17">
+                  <widget class="QLineEdit" name="help_cond_cont2_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -749,14 +748,14 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_38">
                  <item>
-                  <widget class="QLabel" name="label_26">
+                  <widget class="QLabel" name="help_cond_cont3_lbl">
                    <property name="text">
                     <string>content3</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_18">
+                  <widget class="QLineEdit" name="help_cond_cont3_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -769,19 +768,19 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_15">
                <item>
-                <widget class="QListWidget" name="listWidget_2"/>
+                <widget class="QListWidget" name="help_cond_data_tree"/>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_39">
                  <item>
-                  <widget class="QPushButton" name="pushButton_12">
+                  <widget class="QPushButton" name="help_cond_input_btn">
                    <property name="text">
                     <string>插入</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_13">
+                  <widget class="QPushButton" name="help_cond_remove_btn">
                    <property name="text">
                     <string>删除</string>
                    </property>
@@ -809,7 +808,7 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_16">
                <item>
-                <widget class="QLabel" name="label_29">
+                <widget class="QLabel" name="help_pre_lbl">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -831,42 +830,42 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_41">
                  <item>
-                  <widget class="QLabel" name="label_30">
+                  <widget class="QLabel" name="help_pre_type_lbl">
                    <property name="text">
-                    <string>TriggerType</string>
+                    <string>ConditionType</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_8"/>
+                  <widget class="QComboBox" name="help_pre_type_boox"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_42">
                  <item>
-                  <widget class="QLabel" name="label_31">
+                  <widget class="QLabel" name="help_pre_cont1_lbl">
                    <property name="text">
                     <string>content1</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_19"/>
+                  <widget class="QLineEdit" name="help_pre_cont1_edit"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_43">
                  <item>
-                  <widget class="QLabel" name="label_32">
+                  <widget class="QLabel" name="help_pre_cont2_lbl">
                    <property name="text">
                     <string>content2</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_20">
+                  <widget class="QLineEdit" name="help_pre_cont2_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -877,14 +876,14 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_44">
                  <item>
-                  <widget class="QLabel" name="label_33">
+                  <widget class="QLabel" name="help_pre_cont3_lbl">
                    <property name="text">
                     <string>content3</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_21">
+                  <widget class="QLineEdit" name="help_pre_cont3_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -897,19 +896,19 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_17">
                <item>
-                <widget class="QListWidget" name="listWidget_3"/>
+                <widget class="QListWidget" name="help_pre_data_tree"/>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_45">
                  <item>
-                  <widget class="QPushButton" name="pushButton_14">
+                  <widget class="QPushButton" name="help_pre_input_btn">
                    <property name="text">
                     <string>插入</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_15">
+                  <widget class="QPushButton" name="help_pre_remove_btn">
                    <property name="text">
                     <string>删除</string>
                    </property>
@@ -933,7 +932,7 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_18">
                <item>
-                <widget class="QLabel" name="label_34">
+                <widget class="QLabel" name="help_do_data_lbl">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -941,7 +940,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Preconditions</string>
+                  <string>DoData</string>
                  </property>
                 </widget>
                </item>
@@ -955,42 +954,42 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_47">
                  <item>
-                  <widget class="QLabel" name="label_35">
+                  <widget class="QLabel" name="help_do_type_lbl">
                    <property name="text">
-                    <string>TriggerType</string>
+                    <string>DoType</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_9"/>
+                  <widget class="QComboBox" name="help_do_type_box"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_48">
                  <item>
-                  <widget class="QLabel" name="label_36">
+                  <widget class="QLabel" name="help_do_cont1_lbl">
                    <property name="text">
                     <string>content1</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_22"/>
+                  <widget class="QLineEdit" name="help_do_cont1_edit"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_49">
                  <item>
-                  <widget class="QLabel" name="label_37">
+                  <widget class="QLabel" name="help_do_cont2_lbl">
                    <property name="text">
                     <string>content2</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_23">
+                  <widget class="QLineEdit" name="help_do_cont2_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -1001,14 +1000,14 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_50">
                  <item>
-                  <widget class="QLabel" name="label_38">
+                  <widget class="QLabel" name="help_do_cont3_lbl">
                    <property name="text">
                     <string>content3</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_24">
+                  <widget class="QLineEdit" name="lhelp_do_cont3_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -1019,14 +1018,14 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_103">
                  <item>
-                  <widget class="QLabel" name="label_39">
+                  <widget class="QLabel" name="help_do_cont4_lbl">
                    <property name="text">
                     <string>content4</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_25">
+                  <widget class="QLineEdit" name="help_do_cont4_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -1037,14 +1036,14 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_104">
                  <item>
-                  <widget class="QLabel" name="label_79">
+                  <widget class="QLabel" name="help_do_cont5_lbl">
                    <property name="text">
                     <string>content5</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_51">
+                  <widget class="QLineEdit" name="help_do_cont5_edit">
                    <property name="text">
                     <string/>
                    </property>
@@ -1057,19 +1056,19 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_19">
                <item>
-                <widget class="QListWidget" name="listWidget_4"/>
+                <widget class="QListWidget" name="help_do_tree"/>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_51">
                  <item>
-                  <widget class="QPushButton" name="pushButton_16">
+                  <widget class="QPushButton" name="help_do_input_btn">
                    <property name="text">
                     <string>插入</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_17">
+                  <widget class="QPushButton" name="help_do_remove_btn">
                    <property name="text">
                     <string>删除</string>
                    </property>
@@ -1095,26 +1094,26 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_40">
          <item>
-          <widget class="QLabel" name="label_80">
+          <widget class="QLabel" name="help_preview_lbl">
            <property name="text">
             <string>PreView</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QTextEdit" name="textEdit_3"/>
+          <widget class="QTextEdit" name="help_preview_edit"/>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_107">
            <item>
-            <widget class="QPushButton" name="pushButton_35">
+            <widget class="QPushButton" name="help_create_btn">
              <property name="text">
               <string>生成</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_36">
+            <widget class="QPushButton" name="help_clear_btn">
              <property name="text">
               <string>清空</string>
              </property>
@@ -1130,7 +1129,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_37">
+          <widget class="QPushButton" name="help_save_btn">
            <property name="text">
             <string>保存</string>
            </property>
