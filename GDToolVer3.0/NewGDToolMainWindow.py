@@ -8,7 +8,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -400,8 +399,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_33.addLayout(self.verticalLayout_13)
         self.verticalLayout_12 = QtWidgets.QVBoxLayout()
         self.verticalLayout_12.setObjectName("verticalLayout_12")
-        self.help_tri_data_tree = QtWidgets.QListWidget(self.layoutWidget1)
+        self.help_tri_data_tree = QtWidgets.QTreeWidget(self.layoutWidget1)
         self.help_tri_data_tree.setObjectName("help_tri_data_tree")
+        self.help_tri_data_tree.headerItem().setText(0, "1")
         self.verticalLayout_12.addWidget(self.help_tri_data_tree)
         self.horizontalLayout_32 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_32.setObjectName("horizontalLayout_32")
@@ -477,8 +477,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_34.addLayout(self.verticalLayout_14)
         self.verticalLayout_15 = QtWidgets.QVBoxLayout()
         self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.help_cond_data_tree = QtWidgets.QListWidget(self.layoutWidget1)
+        self.help_cond_data_tree = QtWidgets.QTreeWidget(self.layoutWidget1)
         self.help_cond_data_tree.setObjectName("help_cond_data_tree")
+        self.help_cond_data_tree.headerItem().setText(0, "1")
         self.verticalLayout_15.addWidget(self.help_cond_data_tree)
         self.horizontalLayout_39 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_39.setObjectName("horizontalLayout_39")
@@ -557,8 +558,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_40.addLayout(self.verticalLayout_16)
         self.verticalLayout_17 = QtWidgets.QVBoxLayout()
         self.verticalLayout_17.setObjectName("verticalLayout_17")
-        self.help_pre_data_tree = QtWidgets.QListWidget(self.layoutWidget1)
+        self.help_pre_data_tree = QtWidgets.QTreeWidget(self.layoutWidget1)
         self.help_pre_data_tree.setObjectName("help_pre_data_tree")
+        self.help_pre_data_tree.headerItem().setText(0, "1")
         self.verticalLayout_17.addWidget(self.help_pre_data_tree)
         self.horizontalLayout_45 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_45.setObjectName("horizontalLayout_45")
@@ -654,9 +656,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_46.addLayout(self.verticalLayout_18)
         self.verticalLayout_19 = QtWidgets.QVBoxLayout()
         self.verticalLayout_19.setObjectName("verticalLayout_19")
-        self.help_do_tree = QtWidgets.QListWidget(self.layoutWidget1)
-        self.help_do_tree.setObjectName("help_do_tree")
-        self.verticalLayout_19.addWidget(self.help_do_tree)
+        self.help_dodata_data_tree = QtWidgets.QTreeWidget(self.layoutWidget1)
+        self.help_dodata_data_tree.setObjectName("help_dodata_data_tree")
+        self.help_dodata_data_tree.headerItem().setText(0, "1")
+        self.verticalLayout_19.addWidget(self.help_dodata_data_tree)
         self.horizontalLayout_51 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_51.setObjectName("horizontalLayout_51")
         self.help_do_input_btn = QtWidgets.QPushButton(self.layoutWidget1)
@@ -722,7 +725,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.gd_type_tab.setCurrentIndex(0)
+        self.gd_type_tab.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -733,6 +736,7 @@ class Ui_MainWindow(object):
         self.gd_tri_cont1_lbl.setText(_translate("MainWindow", "content1"))
         self.gd_tri_cont2_lbl.setText(_translate("MainWindow", "content2"))
         self.gd_tri_cont3_lbl.setText(_translate("MainWindow", "content3"))
+        self.gd_tri_data_tree.headerItem().setText(1, _translate("MainWindow", "Value"))
         self.gd_tri_input_btn.setText(_translate("MainWindow", "插入"))
         self.gd_tri_remove_btn.setText(_translate("MainWindow", "移除"))
         self.gd_cond_isenable_check.setText(_translate("MainWindow", "IsEnable"))
@@ -740,6 +744,7 @@ class Ui_MainWindow(object):
         self.gd_cond_cont1_lbl.setText(_translate("MainWindow", "content1"))
         self.gd_cond_cont2_lbl.setText(_translate("MainWindow", "content2"))
         self.gd_cond_cont3_lbl.setText(_translate("MainWindow", "content3"))
+        self.gd_cond_data_tree.headerItem().setText(1, _translate("MainWindow", "Value"))
         self.gd_cond_input_btn.setText(_translate("MainWindow", "插入"))
         self.gd_cond_remove_btn.setText(_translate("MainWindow", "移除"))
         self.gd_nd_isclick_lbl.setText(_translate("MainWindow", "IsClickToNext"))
@@ -752,6 +757,7 @@ class Ui_MainWindow(object):
         self.gd_nd_cont3_lbl.setText(_translate("MainWindow", "content3"))
         self.gd_nd_cont4_lbl.setText(_translate("MainWindow", "content4"))
         self.gd_nd_cont5_lbl.setText(_translate("MainWindow", "content5"))
+        self.gd_nd_tree.headerItem().setText(1, _translate("MainWindow", "Value"))
         self.gd_nd_input_btn.setText(_translate("MainWindow", "插入"))
         self.gd_nd_remove_btn.setText(_translate("MainWindow", "移除"))
         self.gd_pre_lbl.setText(_translate("MainWindow", "PreView"))
@@ -797,3 +803,4 @@ class Ui_MainWindow(object):
         self.menu.setTitle(_translate("MainWindow", "菜单"))
         self.actionSave_s.setText(_translate("MainWindow", "Save(&s)"))
         self.actionQuit_q.setText(_translate("MainWindow", "Quit(&q)"))
+

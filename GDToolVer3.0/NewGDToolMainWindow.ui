@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -142,6 +142,11 @@
                    <string notr="true">TriggerDataIndex</string>
                   </property>
                  </column>
+                 <column>
+                  <property name="text">
+                   <string>Value</string>
+                  </property>
+                 </column>
                 </widget>
                </item>
                <item>
@@ -249,6 +254,11 @@
                  <column>
                   <property name="text">
                    <string notr="true">ConditionDataIndex</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Value</string>
                   </property>
                  </column>
                 </widget>
@@ -439,6 +449,11 @@
                <column>
                 <property name="text">
                  <string notr="true">DoDataIndex</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Value</string>
                 </property>
                </column>
               </widget>
@@ -644,7 +659,13 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_12">
                <item>
-                <widget class="QListWidget" name="help_tri_data_tree"/>
+                <widget class="QTreeWidget" name="help_tri_data_tree">
+                 <column>
+                  <property name="text">
+                   <string notr="true">1</string>
+                  </property>
+                 </column>
+                </widget>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_32">
@@ -768,7 +789,13 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_15">
                <item>
-                <widget class="QListWidget" name="help_cond_data_tree"/>
+                <widget class="QTreeWidget" name="help_cond_data_tree">
+                 <column>
+                  <property name="text">
+                   <string notr="true">1</string>
+                  </property>
+                 </column>
+                </widget>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_39">
@@ -896,7 +923,13 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_17">
                <item>
-                <widget class="QListWidget" name="help_pre_data_tree"/>
+                <widget class="QTreeWidget" name="help_pre_data_tree">
+                 <column>
+                  <property name="text">
+                   <string notr="true">1</string>
+                  </property>
+                 </column>
+                </widget>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_45">
@@ -1056,7 +1089,13 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_19">
                <item>
-                <widget class="QListWidget" name="help_do_tree"/>
+                <widget class="QTreeWidget" name="help_dodata_data_tree">
+                 <column>
+                  <property name="text">
+                   <string notr="true">1</string>
+                  </property>
+                 </column>
+                </widget>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_51">
