@@ -8,6 +8,8 @@
       <sourceFolder url="file://$MODULE_DIR$/Demo3" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GDToolVer2.0" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GDToolVer3.0" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GDToolVer4.0" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GDToolVer4.0/Info" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7 (PyQt5Project)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
