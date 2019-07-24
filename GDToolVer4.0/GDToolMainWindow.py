@@ -112,8 +112,7 @@ class GDToolMainWindow(QMainWindow):
 
         elif sender == self.ui.cbox_gd_do_type:
             if self.ui.cbox_gd_do_type.currentText() in ['请选择类型', 'ClearTips', 'HideMask', 'ShowMask', 'ClearHighlight',
-                                                         'ClearGuidePanel', 'Complete', 'EnterGame', 'PauseBgm',
-                                                         'HeroEvolutionHideHero', 'HideHeroThumbnail']:
+                                                         'ClearGuidePanel', 'Complete', 'EnterGame', 'PauseBgm']:
                 self.ui.lbl_gd_do_cont1.setVisible(False)
                 self.ui.lbl_gd_do_cont2.setVisible(False)
                 self.ui.lbl_gd_do_cont3.setVisible(False)
@@ -132,7 +131,8 @@ class GDToolMainWindow(QMainWindow):
                                                            'OpenUIPanel', 'CloseUIPanel', 'UnlockModule',
                                                            'DefaultTeleport', 'UnlockNewTeleport', 'ClearMapEvent',
                                                            'ChangeHero', 'LockSkin', 'UnlockSkin', 'LockCardPackage',
-                                                           'UnlockCardPackage', 'WaitEventCompleted']:
+                                                           'UnlockCardPackage', 'WaitEventCompleted',
+                                                           'HideHeroThumbnail']:
                 self.ui.lbl_gd_do_cont1.setVisible(True)
                 self.ui.lbl_gd_do_cont2.setVisible(False)
                 self.ui.lbl_gd_do_cont3.setVisible(False)
@@ -179,6 +179,8 @@ class GDToolMainWindow(QMainWindow):
                     self.ui.lbl_gd_do_cont1.setText('CardPackages')
                 elif self.ui.cbox_gd_do_type.currentText() == 'WaitEventCompleted':
                     self.ui.lbl_gd_do_cont1.setText('NodeIds')
+                elif self.ui.cbox_gd_do_type.currentText() == 'HideHeroThumbnail':
+                    self.ui.lbl_gd_do_cont1.setText('HeroSkinIds')
                 else:
                     pass
 
@@ -186,7 +188,8 @@ class GDToolMainWindow(QMainWindow):
             elif self.ui.cbox_gd_do_type.currentText() in ['SetBlink', 'HideUIObject', 'ShowUIObject',
                                                            'SetInteractable', 'SetCanWalk', 'PlayAVG', 'EnterAdventure',
                                                            'Teleport', 'WaitAreaOpen', 'WaitAreaClose', 'WaitMoveTo',
-                                                           'ShowSingleEffect', 'AddMapEvent', 'PlayVideo', 'PlayBgm']:
+                                                           'ShowSingleEffect', 'AddMapEvent', 'PlayVideo', 'PlayBgm',
+                                                           'HeroEvolutionHideHero']:
                 self.ui.lbl_gd_do_cont1.setVisible(True)
                 self.ui.lbl_gd_do_cont2.setVisible(True)
                 self.ui.lbl_gd_do_cont3.setVisible(False)
@@ -245,6 +248,10 @@ class GDToolMainWindow(QMainWindow):
                 elif self.ui.cbox_gd_do_type.currentText() == 'PlayBgm':
                     self.ui.lbl_gd_do_cont1.setText('BgmName')
                     self.ui.lbl_gd_do_cont2.setText('Replay')
+
+                elif self.ui.cbox_gd_do_type.currentText() == 'HeroEvolutionHideHero':
+                    self.ui.lbl_gd_do_cont1.setText('HeroSkinIds')
+                    self.ui.lbl_gd_do_cont2.setText('HeroIds')
 
                 else:
                     pass
