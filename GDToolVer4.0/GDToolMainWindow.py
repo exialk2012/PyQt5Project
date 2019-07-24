@@ -1,6 +1,7 @@
 from GDToolLayout import Ui_MainWindow
-from PyQt5.QtWidgets import QMainWindow, QTreeWidgetItem,QTreeWidgetItemIterator
+from PyQt5.QtWidgets import QMainWindow, QTreeWidgetItem, QTreeWidgetItemIterator
 import json
+import collections
 import Info.TypeList
 
 
@@ -345,8 +346,15 @@ class GDToolMainWindow(QMainWindow):
                 return
             else:
                 list_gd_tri_data = []
+                dict_gd_tri_data1 = {}
+                dict_gd_tri_data2 = {}
                 tree_gd_tri_data_items = QTreeWidgetItemIterator(self.ui.tree_gd_tri)
-                for item in tree_gd_tri_data_items:
-                    item_data = {}
+                while tree_gd_tri_data_items.value():
+                    print(type(tree_gd_tri_data_items.value()))
+                #     dict_gd_tri_data2['TriggerType'] = tree_gd_tri_data_items.value().text()
+                #     dict_gd_tri_data1['Data'] = dict_gd_tri_data2
+                #     list_gd_tri_data.append(dict_gd_tri_data1)
+                    tree_gd_tri_data_items = tree_gd_tri_data_items.__iadd__(0)
+                # self.gd_content['Triggers'] = list_gd_tri_data
 
             self.ui.pte_preview.setPlainText(str(self.gd_content))
