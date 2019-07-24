@@ -1,5 +1,5 @@
 from GDToolLayout import Ui_MainWindow
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QTreeWidgetItem,QTreeWidgetItemIterator
 import json
 import Info.TypeList
 
@@ -14,7 +14,10 @@ class GDToolMainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.setTypeToCombox()
         self.initGDTri()
+        self.initBtnClick()
         self.show()
+
+        self.gd_content = {}
 
     def setTypeToCombox(self):
         self.ui.cbox_gd_tri_type.addItems(Info.TypeList.LIST_GD_TRI_TYPE)
@@ -52,6 +55,10 @@ class GDToolMainWindow(QMainWindow):
         self.ui.cbox_gd_tri_type.currentIndexChanged.connect(self.changeContentByType)
         self.ui.cbox_gd_pre_type.currentIndexChanged.connect(self.changeContentByType)
         self.ui.cbox_gd_do_type.currentIndexChanged.connect(self.changeContentByType)
+
+    def initBtnClick(self):
+        self.ui.btn_gd_tri_insert.clicked.connect(self.btnClickEvent)
+        self.ui.btn_create.clicked.connect(self.btnClickEvent)
 
     def changeContentByType(self):
         sender = self.sender()
@@ -312,3 +319,34 @@ class GDToolMainWindow(QMainWindow):
 
             else:
                 pass
+
+    def btnClickEvent(self):
+        sender = self.sender()
+        if sender == self.ui.btn_gd_tri_insert:
+            if self.ui.cbox_gd_tri_type.currentText() == '请选择类型':
+                self.ui.statusbar.showMessage('请选择触发类型')
+            elif self.ui.cbox_gd_tri_type.currentText() == 'LoginSuccess':
+                tree_item_gd_tri_data_root = QTreeWidgetItem(self.ui.tree_gd_tri)
+                tree_item_gd_tri_data_root.setText(0, 'Data')
+                tree_item_gd_tri_data_tri = QTreeWidgetItem(tree_item_gd_tri_data_root)
+                tree_item_gd_tri_data_tri.setText(0, 'TriggerType')
+                tree_item_gd_tri_data_tri.setText(1, self.ui.cbox_gd_tri_type.currentText())
+                self.ui.tree_gd_tri.addTopLevelItem(tree_item_gd_tri_data_root)
+
+        elif sender == self.ui.btn_create:
+            if self.ui.le_gd_name.text() == '':
+                self.ui.statusbar.showMessage('请先输入引导名')
+                return
+            else:
+                self.gd_content['GuideName'] = self.ui.le_gd_name.text()
+
+            if self.ui.tree_gd_tri.topLevelItem(0) is None:
+                self.ui.statusbar.showMessage('触发条件不存在')
+                return
+            else:
+                list_gd_tri_data = []
+                tree_gd_tri_data_items = QTreeWidgetItemIterator(self.ui.tree_gd_tri)
+                for item in tree_gd_tri_data_items:
+                    item_data = {}
+
+            self.ui.pte_preview.setPlainText(str(self.gd_content))
