@@ -1,7 +1,6 @@
 from GDToolLayout import Ui_MainWindow
 from PyQt5.QtWidgets import QMainWindow, QTreeWidgetItem, QTreeWidgetItemIterator
 import json
-import collections
 import Info.TypeList
 
 
@@ -59,6 +58,7 @@ class GDToolMainWindow(QMainWindow):
 
     def initBtnClick(self):
         self.ui.btn_gd_tri_insert.clicked.connect(self.btnClickEvent)
+        self.ui.btn_gd_pre_insert.clicked.connect(self.btnClickEvent)
         self.ui.btn_create.clicked.connect(self.btnClickEvent)
 
     def changeContentByType(self):
@@ -326,13 +326,71 @@ class GDToolMainWindow(QMainWindow):
         if sender == self.ui.btn_gd_tri_insert:
             if self.ui.cbox_gd_tri_type.currentText() == '请选择类型':
                 self.ui.statusbar.showMessage('请选择触发类型')
+                return
+
             elif self.ui.cbox_gd_tri_type.currentText() == 'LoginSuccess':
-                tree_item_gd_tri_data_root = QTreeWidgetItem(self.ui.tree_gd_tri)
-                tree_item_gd_tri_data_root.setText(0, 'Data')
-                tree_item_gd_tri_data_tri = QTreeWidgetItem(tree_item_gd_tri_data_root)
-                tree_item_gd_tri_data_tri.setText(0, 'TriggerType')
-                tree_item_gd_tri_data_tri.setText(1, self.ui.cbox_gd_tri_type.currentText())
-                self.ui.tree_gd_tri.addTopLevelItem(tree_item_gd_tri_data_root)
+                root = QTreeWidgetItem(self.ui.tree_gd_tri)
+                root.setText(0, 'Data')
+                child = QTreeWidgetItem(root)
+                child.setText(0, 'TriggerType')
+                child.setText(1, self.ui.cbox_gd_tri_type.currentText())
+                self.ui.tree_gd_tri.addTopLevelItem(root)
+
+            elif self.ui.cbox_gd_tri_type.currentText() in ['OpenPanel', 'NPCClick', 'GuideCompleted', 'ArrivalNode',
+                                                            'PassingNode', 'UIClick']:
+                root = QTreeWidgetItem(self.ui.tree_gd_tri)
+                root.setText(0, 'Data')
+                child1 = QTreeWidgetItem(root)
+                child1.setText(0, 'TriggerType')
+                child1.setText(1, self.ui.cbox_gd_tri_type.currentText())
+
+                child2 = QTreeWidgetItem(root)
+                child2.setText(0, self.ui.lbl_gd_tri_cont1.text())
+                child2.setText(1, self.ui.le_gd_tri_cont1.text())
+
+                self.ui.tree_gd_tri.addTopLevelItem(root)
+
+            elif self.ui.cbox_gd_tri_type.currentText() == 'OpenArea':
+                root = QTreeWidgetItem(self.ui.tree_gd_tri)
+                root.setText(0, 'Data')
+                child1 = QTreeWidgetItem(root)
+                child1.setText(0, 'TriggerType')
+                child1.setText(1, self.ui.cbox_gd_tri_type.currentText())
+
+                child2 = QTreeWidgetItem(root)
+                child2.setText(0, self.ui.lbl_gd_tri_cont1.text())
+                child2.setText(1, self.ui.le_gd_tri_cont1.text())
+
+                child3 = QTreeWidgetItem(root)
+                child3.setText(0, self.ui.lbl_gd_tri_cont2.text())
+                child3.setText(1, self.ui.le_gd_tri_cont2.text())
+
+                self.ui.tree_gd_tri.addTopLevelItem(root)
+
+            else:
+                return
+
+        elif sender == self.ui.btn_gd_pre_insert:
+            if self.ui.cbox_gd_pre_type.currentText() == '请选择类型':
+                self.ui.statusbar.showMessage('请选择前置条件类型')
+                return
+
+            elif self.ui.cbox_gd_pre_type.currentText() == 'GuideCompleted':
+                root = QTreeWidgetItem(self.ui.tree_gd_pre)
+                root.setText(0, 'Data')
+                child1 = QTreeWidgetItem(root)
+                child1.setText(0, 'TriggerType')
+                child1.setText(1, self.ui.cbox_gd_pre_type.currentText())
+
+                child2 = QTreeWidgetItem(root)
+                child2.setText(0, self.ui.lbl_gd_pre_cont1.text())
+                child2.setText(1, self.ui.le_gd_pre_cont1.text())
+
+                self.ui.tree_gd_pre.addTopLevelItem(root)
+
+            else:
+                return
+
 
         elif sender == self.ui.btn_create:
             if self.ui.le_gd_name.text() == '':
@@ -346,15 +404,33 @@ class GDToolMainWindow(QMainWindow):
                 return
             else:
                 list_gd_tri_data = []
-                dict_gd_tri_data1 = {}
-                dict_gd_tri_data2 = {}
-                tree_gd_tri_data_items = QTreeWidgetItemIterator(self.ui.tree_gd_tri)
-                while tree_gd_tri_data_items.value():
-                    print(type(tree_gd_tri_data_items.value()))
-                #     dict_gd_tri_data2['TriggerType'] = tree_gd_tri_data_items.value().text()
-                #     dict_gd_tri_data1['Data'] = dict_gd_tri_data2
-                #     list_gd_tri_data.append(dict_gd_tri_data1)
-                    tree_gd_tri_data_items = tree_gd_tri_data_items.__iadd__(0)
-                # self.gd_content['Triggers'] = list_gd_tri_data
+                for i in range(self.ui.tree_gd_tri.topLevelItemCount()):
+                    dict_gd_tri_data1 = {}
+                    dict_gd_tri_data2 = {}
+                    for j in range(self.ui.tree_gd_tri.topLevelItem(i).childCount()):
+                        dict_gd_tri_data2[
+                            self.ui.tree_gd_tri.topLevelItem(i).child(j).text(0)] = self.ui.tree_gd_tri.topLevelItem(
+                            i).child(j).text(1)
+                    dict_gd_tri_data1['Data'] = dict_gd_tri_data2
+                    list_gd_tri_data.append(dict_gd_tri_data1)
+                self.gd_content['Triggers'] = list_gd_tri_data
 
+            if self.ui.tree_gd_pre.topLevelItem(0) is None:
+                self.ui.statusbar.showMessage('前置条件不存在')
+                return
+
+            else:
+                list_gd_pre_data = []
+                for i in range(self.ui.tree_gd_pre.topLevelItemCount()):
+                    dict_gd_pre_data1 = {}
+                    dict_gd_pre_data2 = {}
+                    for j in range(self.ui.tree_gd_pre.topLevelItem(i).childCount()):
+                        dict_gd_pre_data2[
+                            self.ui.tree_gd_pre.topLevelItem(i).child(j).text(0)] = self.ui.tree_gd_pre.topLevelItem(
+                            i).child(j).text(1)
+                    dict_gd_pre_data1['Data'] = dict_gd_pre_data2
+                    list_gd_pre_data.append(dict_gd_pre_data1)
+                self.gd_content['Preconditions'] = list_gd_pre_data
+
+            self.gd_content = json.dumps(self.gd_content, indent=4)
             self.ui.pte_preview.setPlainText(str(self.gd_content))
