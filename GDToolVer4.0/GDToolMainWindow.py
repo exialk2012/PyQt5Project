@@ -59,6 +59,7 @@ class GDToolMainWindow(QMainWindow):
     def initBtnClick(self):
         self.ui.btn_gd_tri_insert.clicked.connect(self.btnClickEvent)
         self.ui.btn_gd_pre_insert.clicked.connect(self.btnClickEvent)
+        self.ui.btn_gd_do_insert_big.clicked.connect(self.btnClickEvent)
         self.ui.btn_create.clicked.connect(self.btnClickEvent)
 
     def changeContentByType(self):
@@ -191,7 +192,6 @@ class GDToolMainWindow(QMainWindow):
                     self.ui.lbl_gd_do_cont1.setText('HeroSkinIds')
                 else:
                     pass
-
 
             elif self.ui.cbox_gd_do_type.currentText() in ['SetBlink', 'HideUIObject', 'ShowUIObject',
                                                            'SetInteractable', 'SetCanWalk', 'PlayAVG', 'EnterAdventure',
@@ -391,6 +391,98 @@ class GDToolMainWindow(QMainWindow):
             else:
                 return
 
+        elif sender == self.ui.btn_gd_do_insert_big:
+            if self.ui.cbox_gd_do_type.currentText() == "请选择类型":
+                self.ui.statusbar.showMessage('请选择执行效果类型')
+                return
+
+            else:
+                root = QTreeWidgetItem(self.ui.tree_gd_do)
+                root.setText(0, 'NodeData')
+
+                child_is_click_to_next = QTreeWidgetItem(root)
+                child_is_click_to_next.setText(0, self.ui.lbl_gd_click_to_next.text())
+                child_is_click_to_next.setText(1, self.ui.cbox_gd_click_to_nex.currentText())
+
+                child_is_auto_to_next = QTreeWidgetItem(root)
+                child_is_auto_to_next.setText(0, self.ui.lbl_gd_auto_to_next.text())
+                child_is_auto_to_next.setText(1, self.ui.cbox_gd_auto_to_nex.currentText())
+
+                root_dodata = QTreeWidgetItem(root)
+                root_dodata.setText(0, 'DoData')
+
+                root_dodata_data = QTreeWidgetItem(root_dodata)
+                root_dodata_data.setText(0, 'Data')
+
+                do_data_child_type = QTreeWidgetItem(root_dodata_data)
+                do_data_child_type.setText(0, 'DoType')
+                do_data_child_type.setText(1, self.ui.cbox_gd_do_type.currentText())
+
+                if self.ui.cbox_gd_do_type.currentText() in ['ClearTips', 'HideMask', 'ShowMask', 'ClearHighlight',
+                                                             'ClearGuidePanel', 'Complete', 'EnterGame', 'PauseBgm']:
+                    pass
+
+                elif self.ui.cbox_gd_do_type.currentText() in ['SetMaskAlpha', 'ShowPictures', 'SetInteractableNames',
+                                                               'WaitPanelOpen', 'WaitPanelClose', 'SetMapActive',
+                                                               'ShowNodeElement', 'HideNodeElement', 'EnableNodeEvent',
+                                                               'DisableNodeEvent', 'LoadNpc', 'DestroyNPC', 'Await',
+                                                               'OpenUIPanel', 'CloseUIPanel', 'UnlockModule',
+                                                               'DefaultTeleport', 'UnlockNewTeleport', 'ClearMapEvent',
+                                                               'ChangeHero', 'LockSkin', 'UnlockSkin',
+                                                               'LockCardPackage',
+                                                               'UnlockCardPackage', 'WaitEventCompleted',
+                                                               'HideHeroThumbnail']:
+                    do_data_child1 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child1.setText(0, self.ui.lbl_gd_do_cont1.text())
+                    do_data_child1.setText(1, self.ui.le_gd_do_cont1.text())
+
+                elif self.ui.cbox_gd_do_type.currentText() in ['SetBlink', 'HideUIObject', 'ShowUIObject',
+                                                               'SetInteractable', 'SetCanWalk', 'PlayAVG',
+                                                               'EnterAdventure',
+                                                               'Teleport', 'WaitAreaOpen', 'WaitAreaClose',
+                                                               'WaitMoveTo',
+                                                               'ShowSingleEffect', 'AddMapEvent', 'PlayVideo',
+                                                               'PlayBgm',
+                                                               'HeroEvolutionHideHero']:
+                    do_data_child1 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child1.setText(0, self.ui.lbl_gd_do_cont1.text())
+                    do_data_child1.setText(1, self.ui.le_gd_do_cont1.text())
+                    do_data_child2 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child2.setText(0, self.ui.lbl_gd_do_cont2.text())
+                    do_data_child2.setText(1, self.ui.le_gd_do_cont2.text())
+
+                elif self.ui.cbox_gd_do_type.currentText() in ['Highlight', 'SetElementAngle']:
+                    do_data_child1 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child1.setText(0, self.ui.lbl_gd_do_cont1.text())
+                    do_data_child1.setText(1, self.ui.le_gd_do_cont1.text())
+                    do_data_child2 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child2.setText(0, self.ui.lbl_gd_do_cont2.text())
+                    do_data_child2.setText(1, self.ui.le_gd_do_cont2.text())
+                    do_data_child3 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child3.setText(0, self.ui.lbl_gd_do_cont3.text())
+                    do_data_child3.setText(1, self.ui.le_gd_do_cont3.text())
+
+                elif self.ui.cbox_gd_do_type.currentText() in ['SetTips', 'LoadElement']:
+                    do_data_child1 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child1.setText(0, self.ui.lbl_gd_do_cont1.text())
+                    do_data_child1.setText(1, self.ui.le_gd_do_cont1.text())
+                    do_data_child2 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child2.setText(0, self.ui.lbl_gd_do_cont2.text())
+                    do_data_child2.setText(1, self.ui.le_gd_do_cont2.text())
+                    do_data_child3 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child3.setText(0, self.ui.lbl_gd_do_cont3.text())
+                    do_data_child3.setText(1, self.ui.le_gd_do_cont3.text())
+                    do_data_child4 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child4.setText(0, self.ui.lbl_gd_do_cont4.text())
+                    do_data_child4.setText(1, self.ui.le_gd_do_cont4.text())
+                    do_data_child5 = QTreeWidgetItem(root_dodata_data)
+                    do_data_child5.setText(0, self.ui.lbl_gd_do_cont5.text())
+                    do_data_child5.setText(1, self.ui.le_gd_do_cont5.text())
+
+                else:
+                    return
+
+            self.ui.tree_gd_do.addTopLevelItem(root)
 
         elif sender == self.ui.btn_create:
             if self.ui.le_gd_name.text() == '':
@@ -432,5 +524,28 @@ class GDToolMainWindow(QMainWindow):
                     list_gd_pre_data.append(dict_gd_pre_data1)
                 self.gd_content['Preconditions'] = list_gd_pre_data
 
-            self.gd_content = json.dumps(self.gd_content, indent=4)
-            self.ui.pte_preview.setPlainText(str(self.gd_content))
+            if self.ui.tree_gd_do.topLevelItem(0) is None:
+                self.ui.statusbar.showMessage('执行效果不存在')
+                return
+
+            else:
+                list_gd_nodedata = []
+                for i in range(self.ui.tree_gd_do.topLevelItemCount()):
+                    dict_gd_nodedata = {}
+                    dict_gd_nodedata[self.ui.lbl_gd_click_to_next.text()] = self.ui.cbox_gd_click_to_nex.currentText()
+                    dict_gd_nodedata[self.ui.lbl_gd_auto_to_next.text()] = self.ui.cbox_gd_auto_to_nex.currentText()
+                    list_gd_dodata = []
+                    dict_gd_dodata1 = {}
+                    dict_gd_dodata2 = {}
+                    for j1 in range(self.ui.tree_gd_do.topLevelItem(i).childCount()):
+                        for j2 in range(self.ui.tree_gd_do.topLevelItem(i).child(j1).childCount()):
+                            dict_gd_dodata2[self.ui.tree_gd_do.topLevelItem(i).child(j1).child(j2).text(0)] = self.ui.tree_gd_do.topLevelItem(i).child(j1).child(j2).text(1)
+                    dict_gd_dodata1['Data'] = dict_gd_dodata2
+                    list_gd_dodata.append(dict_gd_dodata1)
+                    print('1')
+                    dict_gd_nodedata['DoData'] = list_gd_dodata
+                    list_gd_nodedata.append(dict_gd_nodedata)
+                self.gd_content['NodeData'] = list_gd_nodedata
+
+            final_gd_content = json.dumps(self.gd_content, indent=4)
+            self.ui.pte_preview.setPlainText(str(final_gd_content))
